@@ -1,0 +1,34 @@
+Design Briefing and Ideation:
+First Phase - Jeremy Currence and Nige Hood
+11/2/2026 6-10PM
+
+Nige Hood 6:01 to 10:15
+Hour Log Task:
+Engaging my site's to build out a new platform
+Built the Sound Arcade module with:
+1. Music player based on audio files
+2. Arcade cabinet with one game on the shelf
+Next Updating personal and visionary details for the brief the Processing cadence.
+3. Added an artist page for Nige Hood
+4. Included Returnity
+5. Created Dev sites sharing platform to share
+6. Created one button turnkey website platform for build once and run using config json setup
+
+10:30 to 12:45
+7. Created build page for dev site
+8. Opened Project for Nige - using email nigehoodpress@gmail.com
+9. Created an interactive experience for music and platformers
+10. Retrieved Notes For Reference: 
+
+
+(2015 Recalled Notes)
+[Subject: Video Game References for the App]
+On Sun, May 31, 2015, 1:55 PM Nigel "Nige" Hood <nghood89@aol.com> wrote:
+STORY FLOW
+http://www.playtowerdefensegames.com/games/1078/play.html?fromPTD2 [This is the best example I found of the Story Flow format. Much like what we spoke of, "the Professor Oak type narration" can send the main character, NiGE, to each level, mission or section of the city]
+
+LEVELS
+http://www.onlymariogames.com/play/Super-Mario-Land.html#play [The Main Play for each level can be something like this where I'll have to get from point A to point B]
+
+LEVEL FINALES
+http://www.onlymariogames.com/play/Street-Fighter-2.html#play [This can be the "Boss Section" at the end of each level, where NiGE, the main character changes into a different look, like from Mario format to a more detailed Street Fighter format]

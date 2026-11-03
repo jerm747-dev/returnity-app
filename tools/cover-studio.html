@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cover Studio</title>
+<style>
+  :root { --bg: #0e0f13; --surface: #171920; --surface-2: #22252f; --line: #2c303b; --text: #f2f3f5; --muted: #9aa0ad; --accent: #f5a524; --good: #5fd39a; --bad: #ff7a7a; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  button, input, select { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 22px 16px 60px; }
+  header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 24px; margin-bottom: 18px; }
+  .eyebrow { margin: 0; color: var(--accent); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
+  h1 { margin: 2px 0 4px; font-size: clamp(26px, 4vw, 36px); letter-spacing: -.02em; }
+  h2 { margin: 0 0 4px; font-size: 17px; }
+  .lead, .sub, .note { color: var(--muted); margin: 0; }
+  .sub { margin-bottom: 12px; font-size: 13px; }
+  .note { min-height: 20px; font-size: 13px; }
+  .note.good { color: var(--good); } .note.bad { color: var(--bad); }
+  .btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); padding: 8px 14px; border-radius: 99px; cursor: pointer; font-size: 14px; font-weight: 600; min-height: 38px; text-decoration: none; color: var(--text); }
+  .btn:hover { background: var(--surface-2); }
+  .btn.primary { background: var(--accent); color: #111; border-color: var(--accent); }
+  .btn.small { padding: 5px 10px; min-height: 30px; font-size: 13px; }
+  .btn:disabled { opacity: .4; cursor: default; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 20px; align-items: start; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-bottom: 18px; }
+  .presets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .preset { border: 1px solid var(--line); background: var(--bg); border-radius: 10px; padding: 6px 8px; cursor: pointer; display: flex; flex-direction: column; gap: 4px; min-width: 104px; font-size: 12px; font-weight: 600; text-align: left; }
+  .preset i { display: block; height: 10px; border-radius: 4px; }
+  .preset.on { border-color: var(--accent); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); gap: 7px; }
+  .sw { position: relative; aspect-ratio: 1; border-radius: 9px; border: 0; padding: 0; cursor: pointer; box-shadow: inset 0 0 0 1px rgb(255 255 255 / .12); }
+  .sw.on { outline: 3px solid #fff; outline-offset: 2px; z-index: 1; }
+  .panel { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 14px; }
+  .big { width: 100%; aspect-ratio: 1; border-radius: 14px; display: block; box-shadow: 0 16px 40px rgb(0 0 0 / .5); }
+  label { display: flex; flex-direction: column; gap: 5px; font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+  input:not([type=color]), select { background: var(--bg); border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; min-height: 38px; width: 100%; }
+  input[type=color] { width: 54px; height: 40px; border: 0; padding: 0; background: none; cursor: pointer; }
+  .samples { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
+  .samples img { width: 100%; aspect-ratio: 1; border-radius: 10px; display: block; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10px; }
+  .hex { font-family: ui-monospace, Menlo, Consolas, monospace; }
+  .banner { padding: 12px 14px; border: 1px solid #f5c451; background: #2b2412; border-radius: 12px; margin-bottom: 16px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <p class="eyebrow">Sound Arcade</p>
+      <h1>Cover Studio</h1>
+      <p class="lead">Song covers without artwork use these colors and your center mark. Make album covers here too.</p>
+    </div>
+    <div class="row">
+      <span id="note" class="note" role="status"></span>
+      <button class="btn" id="dl-json" type="button">Download palette</button>
+      <button class="btn primary" id="save" type="button">Save to site settings</button>
+    </div>
+  </header>
+  <div id="offline" class="banner" hidden>Open this page from the setup page (npm start) to save straight into your settings. You can still design and download here.</div>
+
+  <div class="layout">
+    <div>
+      <section class="card">
+        <h2>Palette</h2>
+        <p class="sub">Start from a palette, then click any color to change it. Each song keeps the same color; a big library gets an even mix.</p>
+        <div class="presets" id="presets"></div>
+        <div class="row" style="margin-bottom:12px">
+          <span id="count" class="note"></span>
+          <button class="btn small" type="button" id="add">Add color</button>
+          <button class="btn small" type="button" id="remove">Remove selected</button>
+          <button class="btn small" type="button" id="shuffle">Shuffle order</button>
+          <label style="flex-direction:row;align-items:center;margin:0;font-weight:500">Colors from palette
+            <select id="size" style="width:auto"><option>24</option><option>32</option><option selected>64</option><option>128</option></select></label>
+        </div>
+        <div class="grid" id="grid"></div>
+      </section>
+
+      <section class="card">
+        <h2>Song covers</h2>
+        <p class="sub">How the list will look with these colors.</p>
+        <div class="two" style="max-width:520px">
+          <label>Center mark <span class="sub" style="margin:0">blank = artist initials, up to 6 letters</span><input id="mark" maxlength="6"></label>
+          <label>Mark color<select id="mark-style"><option value="auto">Automatic</option><option value="dark">Dark</option><option value="light">Light</option></select></label>
+        </div>
+        <div class="samples" id="samples"></div>
+      </section>
+
+      <section class="card">
+        <h2>Album cover</h2>
+        <p class="sub">Title and artist on the marble. Download a 1500 × 1500 PNG, or put it straight on one of your albums.</p>
+        <div class="two">
+          <label>Album title<input id="a-title" value="Album Title"></label>
+          <label>Artist<input id="a-artist"></label>
+        </div>
+        <div class="row">
+          <label style="margin:0">Color<input type="color" id="a-color" value="#9b6bea"></label>
+          <label style="margin:0;flex:1;min-width:180px">Use on album<select id="a-target"></select></label>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <button class="btn" type="button" id="a-dl">Download PNG</button>
+          <button class="btn primary" type="button" id="a-use">Use on this album</button>
+        </div>
+      </section>
+    </div>
+
+    <aside class="panel">
+      <section class="card">
+        <h2>Selected color</h2>
+        <img class="big" id="big" alt="Cover preview">
+        <div class="row" style="margin-top:12px">
+          <input type="color" id="pick" aria-label="Pick color">
+          <input id="hex" class="hex" style="width:120px" aria-label="Hex color" spellcheck="false">
+        </div>
+      </section>
+      <section class="card">
+        <h2>Album preview</h2>
+        <img class="big" id="album-big" alt="Album cover preview">
+      </section>
+    </aside>
+  </div>
+</div>
+
+<script type="module">
+import { coverSvg, albumCoverSvg, initials, svgDataUrl } from '../shared/covers.js';
+import { NEON, SEASONS, SINGLES, spread } from '../shared/palettes.js';
+
+const $ = (s) => document.querySelector(s);
+let cfg = null, online = false;
+let colors = [...NEON], sel = 0, presetId = 'neon';
+const SAMPLE = ['Night Drive', 'Morning Coffee', 'Bounce House', 'First Light', 'Second Wind', 'Summer Song', 'City Lights', 'Slow Burn', 'Afterglow', 'Run It Back', 'Low Tide', 'Gold Rush'];
+
+const presets = () => [
+  { id: 'neon', name: 'Neon (default)', colors: NEON },
+  ...SEASONS.map((s) => ({ id: s.id, name: s.name, stops: s.stops })),
+  ...SINGLES.map((s) => ({ id: s.id, name: s.name, stops: s.stops })),
+];
+const hash = (s) => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
+const pickColor = (id) => colors[hash(id) % colors.length];
+const markText = () => $('#mark').value || initials(cfg?.site?.artist || cfg?.site?.name || 'Your Name');
+const note = (t, k = '') => { const n = $('#note'); n.textContent = t; n.className = `note ${k}`; };
+
+function renderPresets() {
+  $('#presets').innerHTML = presets().map((p) => {
+    const cs = p.colors || spread(p.stops, 12);
+    return `<button type="button" class="preset ${p.id === presetId ? 'on' : ''}" data-id="${p.id}">${p.name}<i style="background:linear-gradient(90deg,${cs.slice(0, 12).join(',')})"></i></button>`;
+  }).join('');
+  document.querySelectorAll('.preset').forEach((b) => {
+    b.onclick = () => {
+      const p = presets().find((x) => x.id === b.dataset.id);
+      presetId = p.id;
+      colors = p.colors ? [...p.colors] : spread(p.stops, Number($('#size').value));
+      sel = 0; render(); note('Palette changed. Save to use it.');
+    };
+  });
+}
+
+function render() {
+  $('#grid').innerHTML = colors.map((c, i) => `<button type="button" class="sw ${i === sel ? 'on' : ''}" style="background:${c}" data-i="${i}" aria-label="Color ${i + 1}, ${c}"></button>`).join('');
+  document.querySelectorAll('.sw').forEach((b) => { b.onclick = () => { sel = +b.dataset.i; render(); }; });
+  $('#count').textContent = `${colors.length} colors`;
+  const c = colors[sel] || colors[0];
+  $('#pick').value = c; $('#hex').value = c;
+  const style = $('#mark-style').value;
+  $('#big').src = svgDataUrl(coverSvg({ id: 'preview-' + sel, color: c, mark: markText(), markStyle: style }));
+  $('#samples').innerHTML = SAMPLE.map((n) => `<img alt="${n}" title="${n}" src="${svgDataUrl(coverSvg({ id: n, color: pickColor(n), mark: markText(), markStyle: style }))}">`).join('');
+  renderPresets();
+  renderAlbum();
+}
+
+function albumSvg() {
+  return albumCoverSvg({ id: $('#a-title').value, title: $('#a-title').value || 'Album', artist: $('#a-artist').value, color: $('#a-color').value, markStyle: $('#mark-style').value });
+}
+function renderAlbum() { $('#album-big').src = svgDataUrl(albumSvg()); }
+
+async function albumPng() {
+  const img = new Image();
+  img.src = svgDataUrl(albumSvg());
+  await img.decode();
+  const c = Object.assign(document.createElement('canvas'), { width: 1500, height: 1500 });
+  c.getContext('2d').drawImage(img, 0, 0, 1500, 1500);
+  return new Promise((r) => c.toBlob(r, 'image/png'));
+}
+const fileName = () => ($('#a-title').value || 'album').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '-cover.png';
+
+function download(blob, name) {
+  const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: name });
+  document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+
+async function api(path, opts) {
+  const r = await fetch(path, opts); const d = await r.json();
+  if (!r.ok || !d.ok) throw new Error(d.error || 'Something went wrong.');
+  return d;
+}
+
+// Always save on top of the latest settings, so edits made on the setup page aren't lost
+async function saveCovers(extra) {
+  const { config } = await api('/api/state');
+  config.music ||= {};
+  config.music.covers = { ...(config.music.covers || {}), mark: $('#mark').value, markStyle: $('#mark-style').value, palette: presetId, colors };
+  if (extra) extra(config);
+  await api('/api/config', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(config) });
+  cfg = config;
+}
+
+$('#pick').oninput = (e) => { colors[sel] = e.target.value; presetId = 'custom'; render(); };
+$('#hex').onchange = (e) => { const v = e.target.value.trim(); if (/^#[0-9a-f]{6}$/i.test(v)) { colors[sel] = v.toLowerCase(); presetId = 'custom'; render(); } else e.target.value = colors[sel]; };
+$('#add').onclick = () => { colors.splice(sel + 1, 0, colors[sel] || '#888888'); sel++; presetId = 'custom'; render(); };
+$('#remove').onclick = () => { if (colors.length <= 1) return; colors.splice(sel, 1); sel = Math.max(0, sel - 1); presetId = 'custom'; render(); };
+$('#shuffle').onclick = () => { for (let i = colors.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [colors[i], colors[j]] = [colors[j], colors[i]]; } render(); };
+$('#mark').oninput = render; $('#mark-style').onchange = render;
+['#a-title', '#a-artist', '#a-color'].forEach((s) => { $(s).oninput = renderAlbum; });
+$('#dl-json').onclick = () => download(new Blob([JSON.stringify({ mark: $('#mark').value, markStyle: $('#mark-style').value, palette: presetId, colors }, null, 2)], { type: 'application/json' }), 'cover-palette.json');
+$('#a-dl').onclick = async () => download(await albumPng(), fileName());
+$('#save').onclick = async () => {
+  if (!online) { note('Start the setup page (npm start) to save. Downloading the palette instead.', 'bad'); $('#dl-json').click(); return; }
+  try { await saveCovers(); note('Saved to site settings. Reload the setup page to see it.', 'good'); } catch (e) { note(e.message, 'bad'); }
+};
+$('#a-target').onchange = () => {
+  const a = (cfg?.music?.albums || []).find((x) => x.id === $('#a-target').value);
+  if (a) { $('#a-title').value = a.title; $('#a-artist').value = a.artist || cfg.site?.artist || ''; $('#a-color').value = a.color || '#9b6bea'; renderAlbum(); }
+};
+$('#a-use').onclick = async () => {
+  const id = $('#a-target').value;
+  if (!online || !id) { note(online ? 'Add an album on the setup page first (Music → Albums).' : 'Start the setup page (npm start) to put covers on albums.', 'bad'); return; }
+  try {
+    const { path } = await api(`/api/upload?name=${encodeURIComponent(fileName())}`, { method: 'POST', body: await albumPng() });
+    await saveCovers((config) => { const a = config.music.albums.find((x) => x.id === id); if (a) { a.cover = path; a.color = $('#a-color').value; } });
+    note(`Cover saved on "${$('#a-title').value}".`, 'good');
+  } catch (e) { note(e.message, 'bad'); }
+};
+
+try {
+  ({ config: cfg } = await api('/api/state'));
+  online = true;
+  const c = cfg.music?.covers || {};
+  if (c.colors?.length) colors = [...c.colors];
+  presetId = c.palette || 'neon';
+  $('#mark').value = c.mark || '';
+  $('#mark-style').value = c.markStyle || 'auto';
+  $('#a-artist').value = cfg.site?.artist || '';
+  const albums = cfg.music?.albums || [];
+  $('#a-target').innerHTML = albums.length ? albums.map((a) => `<option value="${a.id}">${a.title}</option>`).join('') : '<option value="">No albums yet</option>';
+  $('#a-target').onchange();
+} catch {
+  $('#offline').hidden = false;
+  $('#a-target').innerHTML = '<option value="">Needs the setup page</option>';
+}
+$('#mark').placeholder = markText();
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#241420">
+<title>Highway Encore · Standalone Game</title>
+<meta name="description" content="Nige Hood’s Highway Encore platformer workshop. Run, jump, flip the road crew, and reach the mansion flag.">
+<link rel="icon" href="assets/record.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="controls.css">
+</head><body>
+<main id="game" aria-label="Highway Encore game"><div class="cabinet"><div class="gamebar"><div class="gamebrand"><img src="assets/record.svg" width="27" height="27" alt=""> HIGHWAY ENCORE</div><div class="tools"><button id="audio" aria-label="Toggle sound" aria-pressed="false">Sound off</button><button id="pause">Pause</button><button id="expand" aria-label="Toggle full screen">⛶</button><button id="instructions" data-help aria-label="Game controls">?</button></div></div>
+<div class="viewport" id="viewport"><canvas id="playfield" tabindex="0" aria-label="Side-scrolling platform game. Move with arrow keys, jump with Space, duck with Down, run with Shift, lift and throw with X."></canvas><div class="hud" aria-hidden="true"><span id="stop">SIDE A</span><span id="score">♪ 00</span><span id="power" hidden></span></div><div class="meter" aria-hidden="true"><i id="progress"></i></div><div id="toast" role="status" aria-live="polite"></div><div class="overlay" id="overlay" hidden><div class="overbox"><div id="overKicker" class="eyebrow">RETURNITY ARCADE</div><h2 id="overTitle"></h2><p id="overText"></p><div class="links"><button id="primary" class="start"></button><button id="secondary" class="minor"></button><button id="music" class="minor" hidden>♪ Music</button></div></div></div></div>
+<div class="deck" aria-label="Arcade touch controls">
+  <div class="direction-control">
+    <div class="dpad" role="group" aria-label="Direction pad">
+      <button class="pad-up" aria-label="Up — jump" data-key="jump">▲</button>
+      <button class="pad-left" aria-label="Move left" data-key="left">◀</button>
+      <span class="pad-center" aria-hidden="true"><img src="assets/record.svg" alt=""></span>
+      <button class="pad-right" aria-label="Move right" data-key="right">▶</button>
+      <button class="pad-down" aria-label="Down — duck" data-key="down">▼</button>
+    </div>
+    <span class="deck-label" aria-hidden="true">DIRECTION</span>
+  </div>
+  <div class="deck-mark" aria-hidden="true">NH<span>ENCORE</span></div>
+  <div class="action-control">
+    <div class="actionpad" role="group" aria-label="Action buttons">
+      <svg class="thumb-arc" viewBox="0 0 156 132" aria-hidden="true"><path d="M 19 115 Q 51 29 130 26"/><path d="M 19 123 Q 53 39 137 36"/></svg>
+      <button class="arc-speed" data-key="speed" aria-label="Toggle speed" aria-pressed="false"><span>Speed</span><i aria-hidden="true"></i></button>
+      <button class="arc-lift" data-key="lift" aria-label="Lift or throw"><span>Lift</span><small>THROW</small></button>
+      <button class="arc-jump" data-key="jump" aria-label="Jump"><span>Jump</span></button>
+    </div>
+    <span class="deck-label" aria-hidden="true">ACTION</span>
+  </div>
+</div>
+<div class="keyline"><span><kbd>←</kbd><kbd>→</kbd> Move</span><span><kbd>↓</kbd> Duck</span><span><kbd>Space</kbd> Jump</span><span><kbd>Shift</kbd> Speed</span><span><kbd>X</kbd> Lift / throw</span><span><kbd>P</kbd> Pause</span></div></div></main>
+<dialog id="help" aria-labelledby="helpTitle"><div class="manual"><button class="close" data-close-help aria-label="Close controls">×</button><div class="eyebrow">FIELD MANUAL &nbsp;/&nbsp; 01</div><h2 id="helpTitle">How to play<span>.</span></h2><p>Get to the mansion flag. Roadside turntables save your place during the run.</p><dl><dt>Move</dt><dd>← → or A / D</dd><dt>Duck</dt><dd>↓ or S. Hold Down on the directional pad.</dd><dt>Jump</dt><dd>Space, ↑ or W. Hold to jump higher.</dd><dt>Speed</dt><dd>Hold Shift while moving.</dd><dt>Lift / throw</dt><dd>Stomp a rival, then press X nearby to lift it. Press X again to throw.</dd><dt>Pause</dt><dd>P or Escape</dd></dl><p>Touch players can slide around the four-way pad and tap an action with the other thumb. Up also jumps. Tap Speed to switch running on or off. Head-bump a gold record crate for eight seconds of Encore power.</p><button class="start" data-play>▶ &nbsp; Play the game</button></div></dialog>
+
+<script src="cast.js"></script>
+<script src="road.js"></script>
+<script src="game.js"></script>
+<script src="interface.js"></script>
+</body></html>

@@ -1,0 +1,72 @@
+{
+  "title": "Flight Control Deck",
+  "tagline": "Asteroid Blast, races and free flight",
+  "description": "A flight and space-shooter deck with chase, cockpit and nose cameras, warp, shields and race modes. Remappable controls with two-stick calibration, mouse mode and on-screen touch controls.",
+  "kind": "game",
+  "status": "in_progress",
+  "version": "v7.1",
+  "controls": [
+    "gamepad",
+    "keyboard",
+    "mouse",
+    "touch"
+  ],
+  "credit": "Original Jerm747 project. All rights reserved.",
+  "accent": "#8FA7BF",
+  "order": 10,
+  "controllerMode": "native",
+  "actions": [
+    {
+      "id": "up",
+      "label": "Move up",
+      "key": "w"
+    },
+    {
+      "id": "down",
+      "label": "Move down",
+      "key": "s"
+    },
+    {
+      "id": "left",
+      "label": "Move left",
+      "key": "a"
+    },
+    {
+      "id": "right",
+      "label": "Move right",
+      "key": "d"
+    },
+    {
+      "id": "fire",
+      "label": "Fire",
+      "key": " ",
+      "pad": "A"
+    },
+    {
+      "id": "aim-up",
+      "label": "Aim up",
+      "key": "ArrowUp"
+    },
+    {
+      "id": "aim-down",
+      "label": "Aim down",
+      "key": "ArrowDown"
+    },
+    {
+      "id": "aim-left",
+      "label": "Aim left",
+      "key": "ArrowLeft"
+    },
+    {
+      "id": "aim-right",
+      "label": "Aim right",
+      "key": "ArrowRight"
+    },
+    {
+      "id": "start",
+      "label": "Start / confirm",
+      "key": "Enter",
+      "pad": "START"
+    }
+  ]
+}

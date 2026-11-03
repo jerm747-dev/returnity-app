@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sound Arcade Setup</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e0f13'/%3E%3Cpath d='M20 34l9 9 16-20' stroke='%23f5a524' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="setup.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <p class="eyebrow">Sound Arcade</p>
+    <h1>Set up your site</h1>
+  </div>
+  <div class="top-actions">
+    <span id="save-state" class="save-state" role="status"></span>
+    <button class="btn" id="btn-import" type="button">Import settings</button>
+    <button class="btn" id="btn-export" type="button">Export settings</button>
+    <button class="btn primary" id="btn-save" type="button">Save</button>
+  </div>
+</header>
+
+<div id="offline" class="banner">
+  <strong>Start the setup helper to use this page.</strong> Double-click <code>start-windows.bat</code> (Windows) or
+  <code>start-mac.command</code> (Mac), or run <code>npm start</code> in this folder. It opens this page at
+  <code>http://localhost:7470</code>, where it can save your settings, scan your music and build the site.
+  Needs Node.js from <a href="https://nodejs.org">nodejs.org</a>.
+</div>
+
+<div class="layout">
+  <nav class="steps" aria-label="Sections">
+    <a href="#site" class="is-on">1. Your site</a>
+    <a href="#look">2. Look</a>
+    <a href="#home">3. Home page</a>
+    <a href="#about">4. About &amp; contact</a>
+    <a href="#music">5. Music</a>
+    <a href="#games">6. Games</a>
+    <a href="#build">7. Build &amp; publish</a>
+  </nav>
+
+  <form id="form" autocomplete="off" onsubmit="return false" hidden>
+    <section id="site" class="card">
+      <h2>1. Your site</h2>
+      <p class="sub">The name and words that appear across the site.</p>
+      <div class="grid2">
+        <label>Site name <input data-path="site.name" required></label>
+        <label>Artist name <em>shown on songs</em><input data-path="site.artist"></label>
+        <label>Header title <em>big text, top left</em><input data-path="site.headerTitle"></label>
+        <label>Header accent <em>optional, in your accent color</em><input data-path="site.headerAccent" placeholder="e.g. .COM"></label>
+      </div>
+      <label>Tagline <input data-path="site.tagline"></label>
+      <label>Description <em>for Google and link previews</em><textarea data-path="site.description" rows="2"></textarea></label>
+      <div class="grid3">
+        <label>Your real name <em>optional</em><input data-path="site.realName"></label>
+        <label>Location <em>optional</em><input data-path="site.location"></label>
+        <label>Web address <em>optional</em><input data-path="site.url" placeholder="https://example.com"></label>
+      </div>
+    </section>
+
+    <section id="look" class="card">
+      <h2>2. Look</h2>
+      <div class="look">
+        <div>
+          <div class="colors">
+            <label class="color">Accent <input type="color" data-path="theme.accent"></label>
+            <label class="color">Background <input type="color" data-path="theme.background"></label>
+            <label class="color">Panels <input type="color" data-path="theme.surface"></label>
+            <label class="color">Text <input type="color" data-path="theme.text"></label>
+            <label class="color">Soft text <input type="color" data-path="theme.muted"></label>
+          </div>
+          <div class="grid2">
+            <label>Font
+              <select data-path="theme.font"><option value="system">Clean (system)</option><option value="rounded">Rounded</option><option value="serif">Serif</option><option value="mono">Typewriter</option></select>
+            </label>
+            <label>Menu
+              <select data-path="theme.menuSide"><option value="right">Slides in from the right</option><option value="left">Slides in from the left</option><option value="top">Drops down from the top</option></select>
+            </label>
+            <label>Menu button
+              <select data-path="theme.menuIcon"><option value="lines">Three lines</option><option value="dots">Three dots</option></select>
+            </label>
+            <div class="upload-row" data-upload="theme.logo"><span>Logo <em>optional, beside the title</em></span></div>
+            <div class="upload-row" data-upload="theme.favicon"><span>Browser tab icon <em>square PNG or SVG</em></span></div>
+          </div>
+          <h3>Intro splash</h3>
+          <div class="grid2">
+            <label>Show it
+              <select data-path="splash.show"><option value="visit">Once per visit</option><option value="first">Only the first time</option><option value="always">Every page load</option><option value="off">Never</option></select>
+            </label>
+            <label>Button text <input data-path="splash.subtitle"></label>
+            <label>Splash title <em>blank = header title</em><input data-path="splash.title"></label>
+            <div class="upload-row" data-upload="splash.image"><span>Splash background image <em>optional</em></span></div>
+          </div>
+          <div class="colors" data-gradient="splash.gradient"><span class="label">Splash colors</span></div>
+        </div>
+        <div class="preview" id="preview" aria-label="Preview">
+          <div class="pv-splash" id="pv-splash"><strong id="pv-splash-title"></strong><span id="pv-tag"></span><i id="pv-enter"></i></div>
+          <div class="pv-page">
+            <div class="pv-top"><img id="pv-logo" alt="" hidden><b id="pv-title"></b><span>Music · Games · About</span></div>
+            <div class="pv-body"><h4 id="pv-name"></h4><div class="pv-rows" id="pv-rows"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="home" class="card">
+      <h2>3. Home page</h2>
+      <p class="sub">The artist page people land on: the album, a scroll tour of your cities over a night map, and an arcade room of things to play. Turn it off and the music library is the home page.</p>
+      <label class="check"><input type="checkbox" data-path="home.enabled"> Use the artist home page</label>
+      <div class="grid2">
+        <label>Small line above the title <input data-path="home.eyebrow" placeholder="New album"></label>
+        <label>Tour label <input data-path="home.tourLabel"></label>
+        <label>Title, bold part <em>in your accent color</em><input data-path="home.title" placeholder="RETURN"></label>
+        <label>Title, light part <input data-path="home.titleLight" placeholder="ITY"></label>
+      </div>
+      <label>One line about the project <textarea data-path="home.thesis" rows="2"></textarea></label>
+      <div class="grid2">
+        <div class="upload" data-upload="home.heroImage"><span class="label">Hero artwork <em>wide image, beside the title</em></span></div>
+        <div class="upload" data-upload="home.character"><span class="label">Character cutout <em>transparent PNG or WebP of the artist</em></span></div>
+      </div>
+
+      <h3>The route</h3>
+      <p class="sub">Cities light up gold on a night map; scrolling travels from one stop to the next. Start typing a city and its position fills in. A city that isn't a stop is only a light on the map.</p>
+      <div class="grid2">
+        <label class="check"><input type="checkbox" data-path="home.map.enabled"> Show the night map</label>
+        <label class="check"><input type="checkbox" data-path="home.map.returnArc"> Draw the return arc (last stop back to the first)</label>
+        <label>Coastline <select data-path="home.map.region"><option value="">None (lights only)</option><option value="us-east">US East Coast</option></select></label>
+        <label>Brightest city <select id="map-highlight"></select></label>
+      </div>
+      <div id="cities" class="list"></div>
+      <button class="btn small" type="button" id="add-city">Add a city</button>
+      <datalist id="city-names"></datalist>
+      <details class="tips">
+        <summary>Road under the route <em>(optional)</em></summary>
+        <p class="muted small">One point per line as <code>latitude, longitude</code>, in travel order. Leave blank for straight lines between cities.</p>
+        <textarea id="map-road" rows="5" spellcheck="false" placeholder="33.749, -84.388&#10;34.0, -84.05"></textarea>
+      </details>
+
+      <h3>Eras</h3>
+      <p class="sub">The orbit in the arcade room. Each era can have its own picture; without one it uses the character cutout.</p>
+      <div id="eras" class="list"></div>
+      <button class="btn small" type="button" id="add-era">Add an era</button>
+
+      <h3>Arcade room</h3>
+      <label>Heading <input data-path="home.arcade.title"></label>
+      <div class="checks">
+        <label class="check"><input type="checkbox" data-path="home.arcade.pieces.deck"> Tape deck</label>
+        <label class="check"><input type="checkbox" data-path="home.arcade.pieces.turntable"> Turntable</label>
+        <label class="check"><input type="checkbox" data-path="home.arcade.pieces.beatpad"> Beat pad</label>
+        <label class="check"><input type="checkbox" data-path="home.arcade.pieces.eras"> Eras</label>
+        <label class="check"><input type="checkbox" data-path="home.arcade.pieces.power"> Power up</label>
+        <label class="check"><input type="checkbox" data-path="home.arcade.pieces.studio"> Studio</label>
+        <label class="check"><input type="checkbox" data-path="home.arcade.pieces.notes"> Liner notes</label>
+        <label class="check"><input type="checkbox" data-path="home.arcade.pieces.collect"> Collect</label>
+      </div>
+      <div class="grid2">
+        <label>Power up heading <input data-path="home.power.heading"></label>
+        <label>Power up tag <em>shown when charged</em><input data-path="home.power.tag"></label>
+      </div>
+      <label>Power up text <textarea data-path="home.power.text" rows="2"></textarea></label>
+      <label>Liner notes story <em>a blank line starts a new paragraph</em><textarea data-path="home.notes.story" rows="4"></textarea></label>
+      <span class="label">Credits</span>
+      <div id="credits" class="list"></div>
+      <button class="btn small" type="button" id="add-credit">Add a credit</button>
+      <label>Collect text <input data-path="home.collect.text"></label>
+      <label>Coming soon items <em>separate with commas</em><input id="collect-items"></label>
+    </section>
+
+    <section id="about" class="card">
+      <h2>4. About &amp; contact</h2>
+      <div class="grid2">
+        <label>About page heading <input data-path="about.heading"></label>
+        <div class="upload-row" data-upload="about.photo"><span>Photo <em>optional</em></span></div>
+      </div>
+      <label>About text <em>a blank line starts a new paragraph</em><textarea data-path="about.body" rows="6"></textarea></label>
+      <div class="grid2">
+        <label>Contact page heading <input data-path="contact.heading"></label>
+        <label>Email <input type="email" data-path="contact.email"></label>
+        <label>Phone <em>optional</em><input data-path="contact.phone"></label>
+        <label>What you're open to <input data-path="contact.workingOn"></label>
+      </div>
+      <label>Reply note <input data-path="contact.responseNote"></label>
+      <h3>Social links</h3>
+      <div id="social" class="list"></div>
+      <button class="btn small" type="button" id="add-social">Add a link</button>
+    </section>
+
+    <section id="music" class="card">
+      <h2>5. Music</h2>
+      <p class="sub">Put your audio files in the <code id="music-folder">music</code> folder, then scan. File names become song titles; see the tips below.</p>
+      <div class="scan">
+        <button class="btn primary" type="button" id="btn-scan">Scan music</button>
+        <span id="scan-state" class="muted"></span>
+      </div>
+      <div id="songs" class="songs"></div>
+      <details class="tips">
+        <summary>File name tips</summary>
+        <ul>
+          <li><code>0003 Who We Are.mp3</code>: a leading number sets the order.</li>
+          <li><code>Night Drive B96PM.mp3</code> or <code>96BPM</code>: the tempo.</li>
+          <li><code>Song 20251113.wav</code>: a date (otherwise the file's date).</li>
+          <li><code>Song-404.mp3</code>, <code>Song-405.mp3</code>: takes of one song, shown as versions.</li>
+          <li><code>Song ft Someone.mp3</code>: featured artists.</li>
+          <li><code>DEMO 02 Song.mp3</code>: track 2 of the album whose prefix is DEMO.</li>
+        </ul>
+      </details>
+      <div class="grid2">
+        <label>Music folder <em>inside this kit</em><input data-path="music.audioFolder"></label>
+        <label class="check"><input type="checkbox" data-path="music.showTempo"> Show tempo (BPM) on songs</label>
+      </div>
+      <h3>Albums</h3>
+      <p class="sub">Songs whose file names start with the prefix go on the album. No cover? One is drawn for you.</p>
+      <div id="albums" class="list"></div>
+      <button class="btn small" type="button" id="add-album">Add an album</button>
+      <h3>Song covers</h3>
+      <div class="cover-row">
+        <div id="cover-samples" class="cover-samples"></div>
+        <div>
+          <label>Center mark <em>blank = artist initials</em><input data-path="music.covers.mark" maxlength="6"></label>
+          <label>Mark color
+            <select data-path="music.covers.markStyle"><option value="auto">Automatic</option><option value="dark">Dark</option><option value="light">Light</option></select>
+          </label>
+          <a class="btn" href="/tools/cover-studio.html" target="_blank" id="btn-studio">Open Cover Studio</a>
+          <p class="muted small">Pick palettes, edit colors and make album covers. Save there, then reload here.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="games" class="card">
+      <h2>6. Games</h2>
+      <label class="check"><input type="checkbox" data-path="games.enabled"> Include the game cabinet (at <code>/games/</code>)</label>
+      <div class="grid2">
+        <label>Menu label <input data-path="games.menuLabel"></label>
+        <label>Subtitle <input data-path="games.subtitle"></label>
+        <label>Cabinet title <input data-path="games.title"></label>
+        <label>Title accent <em>second word, highlighted</em><input data-path="games.titleAccent"></label>
+      </div>
+      <label>Footer line <em>blank = "Games by (artist). Music at (site)."</em><input data-path="games.footer"></label>
+      <div class="wings">
+        <fieldset>
+          <legend>Left side panel</legend>
+          <label>Big word <input data-path="games.wings.left.word"></label>
+          <label>Caption <input data-path="games.wings.left.caption"></label>
+          <div class="upload-row" data-upload="games.wings.left.image"><span>Artwork <em>tall, about 1:3</em></span></div>
+          <div class="colors" data-gradient="games.wings.left.gradient" data-optional="1"><span class="label">Gradient <em>blank = sunset to match the top</em></span></div>
+        </fieldset>
+        <fieldset>
+          <legend>Right side panel</legend>
+          <label>Big word <input data-path="games.wings.right.word"></label>
+          <label>Caption <input data-path="games.wings.right.caption"></label>
+          <div class="upload-row" data-upload="games.wings.right.image"><span>Artwork <em>tall, about 1:3</em></span></div>
+          <div class="colors" data-gradient="games.wings.right.gradient" data-optional="1"><span class="label">Gradient <em>blank = sunset to match the top</em></span></div>
+        </fieldset>
+      </div>
+      <div class="grid2">
+        <label>Bottom left label <input data-path="games.deck.left"></label>
+        <label>Bottom right label <input data-path="games.deck.right"></label>
+      </div>
+      <h3>How games open</h3>
+      <p class="sub">Starting choices for visitors. Each player can change these in the arcade's Controls panel (Display tab).</p>
+      <label class="check"><input type="checkbox" data-path="games.display.fill"> Arcade mode: the game fills the whole window</label>
+      <label class="check"><input type="checkbox" data-path="games.display.native"> Go full screen when a game starts</label>
+      <label class="check"><input type="checkbox" data-path="games.display.hideBar"> Tuck the game toolbar away while playing</label>
+      <label style="max-width:320px">Screen direction on phones
+        <select data-path="games.display.orientation"><option value="auto">Follow the device</option><option value="landscape">Landscape</option><option value="portrait">Portrait</option></select>
+      </label>
+      <p class="sub">Add games by putting a folder with an <code>index.html</code> in <code>apps/games/public/projects/</code>. Flight Control Deck is there to start; see the README in that folder.</p>
+    </section>
+
+    <section id="build" class="card">
+      <h2>7. Build &amp; publish</h2>
+      <p class="sub" id="build-status"></p>
+      <div class="build-actions">
+        <button class="btn primary" type="button" id="btn-build">Save and build site</button>
+        <button class="btn" type="button" id="btn-build-code">Build without music <em>faster, code only</em></button>
+        <a class="btn" href="/preview/" target="_blank" id="btn-preview">Preview built site</a>
+      </div>
+      <details class="dev">
+        <summary>Developer tools</summary>
+        <p class="sub">Live-reload servers for editing the code in <code>apps/</code>. Edit, save, and the browser updates.</p>
+        <div class="build-actions">
+          <button class="btn" type="button" data-run="install">Install packages</button>
+          <button class="btn" type="button" data-run="dev-player">Run player (dev)</button>
+          <button class="btn" type="button" data-run="dev-games">Run games (dev)</button>
+          <button class="btn" type="button" data-run="stop">Stop dev server</button>
+        </div>
+        <p class="muted small">Dev servers: player at <a href="http://localhost:5173" target="_blank">localhost:5173</a>, games at <a href="http://localhost:5174" target="_blank">localhost:5174</a>.</p>
+      </details>
+      <pre id="log" class="log" aria-live="polite" hidden></pre>
+      <ol class="publish">
+        <li>Build the site.</li>
+        <li>Upload <strong>everything inside the <code>dist</code> folder</strong> to your web host (cPanel File Manager, FTP, Netlify drop, and so on).</li>
+        <li>Changed only words or colors later? Upload the new <code>site.config.json</code> (it sits in <code>dist/</code> and <code>dist/games/</code>). No rebuild needed for the live site to pick it up.</li>
+      </ol>
+    </section>
+  </form>
+</div>
+
+<input type="file" id="import-file" accept=".json,application/json" hidden>
+<input type="file" id="upload-file" accept="image/*" hidden>
+<script type="module" src="setup.js"></script>
+</body>
+</html>

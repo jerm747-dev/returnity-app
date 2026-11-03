@@ -1,0 +1,27 @@
+{
+  "name": "sound-arcade",
+  "private": true,
+  "version": "0.3.1",
+  "type": "module",
+  "description": "Turnkey music site + game cabinet. Fill in the setup page, build, upload.",
+  "workspaces": [
+    "apps/player",
+    "apps/games"
+  ],
+  "scripts": {
+    "start": "node setup/server.mjs",
+    "setup": "node setup/server.mjs",
+    "tracks": "node scripts/make-tracks.mjs",
+    "sync": "node scripts/sync.mjs",
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/sync.mjs && npm run dev -w apps/player",
+    "dev:games": "node scripts/sync.mjs && npm run dev -w apps/games",
+    "test": "node --test scripts/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "allowScripts": {
+    "esbuild@0.25.12": true
+  }
+}

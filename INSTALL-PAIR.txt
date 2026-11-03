@@ -1,0 +1,64 @@
+RETURNITY WORKSHOP — MATCHED ZIP PAIR v3.1
+Nige Hood / Highway Encore — November 3, 2026
+
+WHAT'S NEW IN v3.1
+- Player page: "Play the music" sits to the right of "Start a run" at the
+  bottom. It goes to the site's music player (/#/music on a Sound Arcade
+  site). To point it somewhere else, change MUSIC_URL at the top of player.js.
+- Game: when it runs inside a Sound Arcade cabinet, the title and pause
+  screens get a Music button (M on a keyboard) that opens the arcade's
+  music player over the paused game. Anywhere else the button stays hidden.
+- The folder is still named Returnity-Workshop-v3, so it merges over v3.
+
+EXTRACT BOTH ZIPS INTO THE SAME DESTINATION
+Both archives create one shared folder named Returnity-Workshop-v3.
+The player page stays at the top of that folder. The game lives inside
+its highway-encore subfolder. Allow your unzip app to merge folders.
+If your unzip app creates a separate wrapper for each ZIP, move the
+highway-encore folder from the game package beside the player page's
+index.html instead.
+
+FINISHED LAYOUT
+Returnity-Workshop-v3/
+  index.html                 Player page
+  style.css
+  player-game.css
+  player.js
+  cast.js                    Artwork for the road-crew previews
+  assets/                    Both illustrated page panels and icon
+  highway-encore/
+    index.html               Standalone game entry
+    style.css
+    controls.css
+    interface.js
+    game.js
+    cast.js
+    road.js
+    assets/record.svg
+
+PLAY FROM THE PAGE
+Open Returnity-Workshop-v3/index.html in a computer browser and press
+Play the game. It opens highway-encore/index.html inside the player
+page. Back to player page closes the game. Each launch starts a new run.
+The Open game link opens the standalone version in its own tab.
+
+WORKSHOP JUST THE GAME
+Open Returnity-Workshop-v3/highway-encore/index.html directly.
+The game package is self-contained and can also be hosted on its own.
+When replacing a game build in the paired installation, keep the folder
+name highway-encore and its index.html entry point.
+
+WEB HOSTING AND PHONES
+Upload the contents of Returnity-Workshop-v3 to your web folder, keeping
+the game subfolder and assets in place. Open that web address on a phone
+or tablet. For local computer testing if file opening is restricted,
+run python -m http.server 8000 inside Returnity-Workshop-v3 and visit
+http://localhost:8000. No install or build step is required.
+
+COMPATIBILITY
+Use these two v3 packages together. The earlier v2 ZIP is a complete,
+combined demo. This v3 pair separates its player page from the game.
+The player page uses the relative URL highway-encore/index.html with
+embedded=1 and autostart=1 when opening the game. The standalone game
+also works without those options. Game controls and physics are based
+on the v2 thumb-control demo.

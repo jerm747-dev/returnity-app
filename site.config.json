@@ -1,0 +1,388 @@
+{
+  "_about": "Everything your site shows comes from this file. Edit it on the setup page (npm start) or by hand. Leave a value as \"\" to hide it.",
+  "kitVersion": 1,
+  "site": {
+    "name": "Nige Hood",
+    "headerTitle": "NIGE",
+    "headerAccent": "HOOD",
+    "tagline": "Returnity, the new album",
+    "description": "Nige Hood. Returnity: a new album about cycles, return and growth.",
+    "artist": "Nige Hood",
+    "realName": "",
+    "location": "",
+    "url": "https://returnity.live",
+    "language": "en"
+  },
+  "theme": {
+    "accent": "#e2ad4f",
+    "background": "#0c0c0e",
+    "surface": "#141417",
+    "text": "#ebe7df",
+    "muted": "#98958e",
+    "font": "system",
+    "menuSide": "right",
+    "menuIcon": "lines",
+    "logo": "",
+    "favicon": ""
+  },
+  "splash": {
+    "show": "visit",
+    "title": "",
+    "subtitle": "Tap to enter",
+    "image": "",
+    "gradient": [
+      "#e2ad4f",
+      "#7fbcb5",
+      "#ebe7df"
+    ]
+  },
+  "home": {
+    "enabled": true,
+    "eyebrow": "New album",
+    "title": "RETURN",
+    "titleLight": "ITY",
+    "thesis": "Evolution moves in cycles. Every orbit comes back around, a little further along.",
+    "heroImage": "uploads/mural.webp",
+    "character": "uploads/nige-cutout.webp",
+    "tourLabel": "The route · scroll to travel",
+    "map": {
+      "enabled": true,
+      "region": "us-east",
+      "returnArc": true,
+      "highlight": "atl",
+      "road": [
+        [
+          33.749,
+          -84.388
+        ],
+        [
+          34,
+          -84.05
+        ],
+        [
+          34.3,
+          -83.4
+        ],
+        [
+          34.5,
+          -82.65
+        ],
+        [
+          34.85,
+          -82.4
+        ],
+        [
+          34.95,
+          -81.93
+        ],
+        [
+          35.26,
+          -81.19
+        ],
+        [
+          35.227,
+          -80.843
+        ],
+        [
+          35.67,
+          -80.47
+        ],
+        [
+          36.07,
+          -79.79
+        ],
+        [
+          35.99,
+          -78.9
+        ],
+        [
+          36.3,
+          -78.4
+        ],
+        [
+          36.7,
+          -77.9
+        ],
+        [
+          37.23,
+          -77.4
+        ],
+        [
+          37.54,
+          -77.43
+        ],
+        [
+          38.3,
+          -77.46
+        ],
+        [
+          38.907,
+          -77.037
+        ]
+      ],
+      "cities": [
+        {
+          "id": "dc",
+          "name": "Washington, D.C.",
+          "short": "D.C.",
+          "mapLabel": "D.C.",
+          "lat": 38.907,
+          "lon": -77.037,
+          "stop": true,
+          "heading": "Where it all started",
+          "quote": "",
+          "story": "D.C. is where it all started.",
+          "how": "",
+          "open": "deck",
+          "button": "Press play",
+          "draft": true
+        },
+        {
+          "id": "raleigh",
+          "name": "Raleigh",
+          "short": "Raleigh",
+          "mapLabel": "Raleigh",
+          "lat": 35.78,
+          "lon": -78.64,
+          "stop": false
+        },
+        {
+          "id": "clt",
+          "name": "Charlotte",
+          "short": "Charlotte",
+          "mapLabel": "Charlotte",
+          "lat": 35.227,
+          "lon": -80.843,
+          "stop": true,
+          "heading": "Family",
+          "quote": "My family stood behind me on my musical journey.",
+          "story": "My music journey travels through these places.",
+          "how": "",
+          "open": "eras",
+          "button": "Walk the eras",
+          "draft": true
+        },
+        {
+          "id": "atl",
+          "name": "Atlanta",
+          "short": "Atlanta",
+          "mapLabel": "Atlanta",
+          "lat": 33.749,
+          "lon": -84.388,
+          "stop": true,
+          "heading": "Returnity",
+          "quote": "Atlanta always believed in me.",
+          "story": "",
+          "how": "",
+          "open": "power",
+          "button": "Power up",
+          "draft": true
+        }
+      ]
+    },
+    "eras": [
+      {
+        "year": "2008",
+        "name": "Then",
+        "story": "",
+        "image": "",
+        "look": "mono"
+      },
+      {
+        "year": "2014",
+        "name": "Growth & play",
+        "story": "",
+        "image": "",
+        "look": "color"
+      },
+      {
+        "year": "2020",
+        "name": "Six years on",
+        "story": "",
+        "image": "",
+        "look": "color"
+      },
+      {
+        "year": "2026",
+        "name": "Now",
+        "story": "",
+        "image": "",
+        "look": "gold"
+      }
+    ],
+    "arcade": {
+      "title": "Pick something to play",
+      "pieces": {
+        "deck": true,
+        "turntable": true,
+        "beatpad": true,
+        "eras": true,
+        "power": true,
+        "studio": true,
+        "notes": true,
+        "collect": true
+      }
+    },
+    "power": {
+      "heading": "Power up",
+      "text": "In the games he levels up. Fill the ladder to reach the golden form: gold hair, gold aura, the swirl jacket gone gold and white.",
+      "tag": "Ascended"
+    },
+    "notes": {
+      "story": "",
+      "credits": [
+        {
+          "label": "Written by",
+          "value": ""
+        },
+        {
+          "label": "Produced by",
+          "value": ""
+        },
+        {
+          "label": "Artwork",
+          "value": ""
+        }
+      ]
+    },
+    "collect": {
+      "text": "Every format turns: tape, CD, vinyl.",
+      "items": [
+        "Deluxe bundle",
+        "Hats",
+        "Tees",
+        "Collectibles"
+      ]
+    }
+  },
+  "about": {
+    "heading": "About",
+    "body": "Write a few lines about yourself and your music here.\n\nA blank line starts a new paragraph.",
+    "photo": ""
+  },
+  "contact": {
+    "heading": "Contact",
+    "email": "",
+    "phone": "",
+    "workingOn": "Collaborations, features and custom work",
+    "responseNote": "I read everything and usually reply within a few days."
+  },
+  "social": [
+    {
+      "label": "Instagram",
+      "url": ""
+    },
+    {
+      "label": "YouTube",
+      "url": ""
+    },
+    {
+      "label": "Spotify",
+      "url": ""
+    }
+  ],
+  "music": {
+    "audioFolder": "music",
+    "showTempo": true,
+    "albums": [],
+    "covers": {
+      "mark": "",
+      "markStyle": "auto",
+      "palette": "neon",
+      "colors": [
+        "#b04200",
+        "#786815",
+        "#075127",
+        "#01344b",
+        "#07004d",
+        "#620754",
+        "#600667",
+        "#380003",
+        "#1d013b",
+        "#726800",
+        "#1ba886",
+        "#12646f",
+        "#3c0000",
+        "#482801",
+        "#010294",
+        "#a30503",
+        "#7d7d7d",
+        "#060606",
+        "#000900",
+        "#336006",
+        "#b79c17",
+        "#452103",
+        "#2e73a2",
+        "#a0560c",
+        "#168f0d",
+        "#002067",
+        "#0f5dbd",
+        "#959f0b",
+        "#570027",
+        "#1f012f",
+        "#7c0504",
+        "#0a001f",
+        "#160000",
+        "#001c1d",
+        "#151a00",
+        "#572827",
+        "#b0620f",
+        "#93270c",
+        "#760b29",
+        "#73017c",
+        "#995e10",
+        "#947201",
+        "#d75b07",
+        "#cf1b49",
+        "#d616a8",
+        "#832fe7",
+        "#212ad1",
+        "#c19d01",
+        "#010190",
+        "#0f8723",
+        "#2e7e14",
+        "#568100",
+        "#b7881f",
+        "#bb0a1c",
+        "#b10e70",
+        "#c0c328",
+        "#576073",
+        "#00002a",
+        "#858d9e",
+        "#a0a6b0"
+      ]
+    }
+  },
+  "games": {
+    "enabled": true,
+    "menuLabel": "Games",
+    "title": "RETURN",
+    "titleAccent": "ITY",
+    "subtitle": "Independent games and game design",
+    "footer": "",
+    "wings": {
+      "left": {
+        "image": "",
+        "gradient": [],
+        "word": "PLAY",
+        "caption": "Games. Worlds. Fun."
+      },
+      "right": {
+        "image": "",
+        "gradient": [],
+        "word": "CREATE",
+        "caption": "New levels coming."
+      }
+    },
+    "deck": {
+      "left": "ORIGINAL PLAY",
+      "right": "FREE TO EXPLORE"
+    },
+    "display": {
+      "fill": true,
+      "native": true,
+      "orientation": "auto",
+      "hideBar": true
+    }
+  }
+}

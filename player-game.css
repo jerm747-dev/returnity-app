@@ -1,0 +1,7 @@
+#game-launcher { width:min(1120px,98vw); max-width:98vw; overflow:hidden; background:#211424; }
+.launchbar { height:36px; display:flex; justify-content:space-between; align-items:center; gap:12px; padding:0 12px; background:#211424; }
+.launchbar button,.launchbar a { color:#ffe9bd; background:none; font:12px Arial,sans-serif; text-decoration:none; }
+.launchbar button:hover,.launchbar a:hover { color:#ffc34a; }
+#game-frame { display:block; width:100%; height:min(84dvh,850px); border:0; }
+.stage .links { margin-top:6px; }
+.music-link { color:inherit; text-decoration:none; }

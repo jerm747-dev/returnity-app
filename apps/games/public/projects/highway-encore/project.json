@@ -1,0 +1,22 @@
+{
+  "title": "Highway Encore",
+  "tagline": "Run the highway with Nige Hood",
+  "description": "Flip the road crew, catch the Encore Disc and raise the flag at the mansion. A side-scroller from Returnity. The title and pause screens have a Music button for the site's songs.",
+  "kind": "game",
+  "status": "prototype",
+  "version": "v3",
+  "controls": ["gamepad", "keyboard", "touch"],
+  "credit": "Nige Hood · Returnity. Game workshop.",
+  "accent": "#e2ad4f",
+  "order": 1,
+  "actions": [
+    { "id": "left", "label": "Move left", "key": "ArrowLeft", "pad": "LEFT" },
+    { "id": "right", "label": "Move right", "key": "ArrowRight", "pad": "RIGHT" },
+    { "id": "jump", "label": "Jump", "key": " ", "pad": "A" },
+    { "id": "duck", "label": "Duck", "key": "ArrowDown", "pad": "DOWN" },
+    { "id": "speed", "label": "Speed", "key": "Shift", "pad": "RB" },
+    { "id": "lift", "label": "Lift / throw", "key": "x", "pad": "X" },
+    { "id": "pause", "label": "Pause", "key": "p", "pad": "START" },
+    { "id": "music", "label": "Music", "key": "m", "pad": "SELECT" }
+  ]
+}

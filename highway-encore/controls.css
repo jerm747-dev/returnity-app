@@ -1,0 +1,68 @@
+/* Thumb controls share the record artwork's ink, metallic gold, and teal. */
+.deck {
+  --pad-size: 48px;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px clamp(10px, 3vw, 38px) 8px;
+  border-top: 1px solid #9e6a734d;
+  background:
+    radial-gradient(ellipse at 0 100%, #622b4a66, transparent 60%),
+    radial-gradient(ellipse at 100% 0, #26676844, transparent 65%),
+    #2a1a2c;
+}
+.direction-control, .action-control { flex-shrink: 0; text-align: center; }
+.deck-label { display: block; margin-top: 4px; font: 8px ui-monospace, monospace; letter-spacing: .23em; color: #c4a0ab; }
+.dpad { position: relative; display: grid; gap: 0; grid-template: repeat(3, var(--pad-size)) / repeat(3, var(--pad-size)); border-radius: 50%; background: #160e1d; box-shadow: 0 0 0 1px #8d66734f, inset 0 2px 10px #0009; }
+.deck .dpad button { width: var(--pad-size); height: var(--pad-size); min-width: 0; min-height: 0; padding: 0; border: 1px solid #a48591; color: #ffe7bf; background: linear-gradient(#64455c, #442b43); font-size: 18px; text-shadow: 0 1px 1px #000; box-shadow: inset 0 2px 0 #b48d9b66, 0 3px 0 #170f1d; z-index: 1; }
+.pad-up { grid-area: 1 / 2; border-radius: 12px 12px 5px 5px!important; }
+.pad-left { grid-area: 2 / 1; border-radius: 12px 5px 5px 12px!important; }
+.pad-right { grid-area: 2 / 3; border-radius: 5px 12px 12px 5px!important; }
+.pad-down { grid-area: 3 / 2; border-radius: 5px 5px 12px 12px!important; }
+.pad-center { grid-area: 2 / 2; display: grid; place-items: center; background: #412a3f; }
+.pad-center img { width: 25px; opacity: .75; pointer-events: none; }
+.actionpad { width: 172px; height: 144px; display: block; position: relative; }
+.thumb-arc { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: #c5896a; stroke-width: 1; opacity: .35; pointer-events: none; }
+.thumb-arc path + path { stroke: #41b8b2; }
+.deck .actionpad button { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; border: 1px solid #e3c9ba88; border-radius: 50%; padding: 0; min-width: 0; min-height: 0; font: 800 11px Arial, sans-serif; text-transform: uppercase; letter-spacing: .02em; box-shadow: inset 0 2px 1px #ffffff3d, 0 4px 0 #120e1a, 0 6px 10px #120e1a77; }
+.actionpad small { font: 7px ui-monospace, monospace; letter-spacing: .04em; }
+.deck .arc-speed { width: 48px; height: 48px; left: 1px; bottom: 8px; background: #bd497b; color: #ffeddb; }
+.arc-speed i { width: 4px; height: 4px; margin-top: 3px; border-radius: 50%; background: #4e213d; }
+.deck .arc-lift { width: 54px; height: 54px; left: 53px; top: 31px; background: #60bfb4; color: #1e3034; }
+.deck .arc-jump { width: 62px; height: 62px; left: 110px; top: 4px; background: #ffc34a; color: #38232b; font-size: 12px; }
+.deck .dpad button.held, .deck .actionpad button.held { filter: brightness(1.16); transform: translateY(2px); box-shadow: inset 0 2px 5px #0005, 0 1px 0 #120e1a; }
+.deck .dpad button.held { background: #65c4b5; color: #1b2833; }
+.deck .arc-speed[aria-pressed=true] { background: #ec73a2; outline: 2px solid #ffdf91; outline-offset: 2px; color: #321526; }
+.arc-speed[aria-pressed=true] i { background: #ffed92; box-shadow: 0 0 5px #ffed92; }
+.deck-mark { color: #c5936d60; font: italic 800 28px Georgia, serif; text-align: center; letter-spacing: -.1em; }
+.deck-mark span { display: block; font: 7px ui-monospace, monospace; letter-spacing: .27em; margin-top: 4px; }
+.cabinet { display: flex; flex-direction: column; max-height: calc(96dvh - 2px); width: 100%; }
+.gamebar, .keyline { flex: 0 0 auto; }
+.viewport { flex: 1 1 auto; min-height: 0; height: min(44vw, calc(96dvh - 258px)); aspect-ratio: auto; }
+#game { width: min(1020px, 96vw); }
+#game:fullscreen .cabinet { width: min(1120px, 100vw); max-height: 100dvh; }
+#game:fullscreen .viewport { height: min(49vw, calc(100dvh - 258px)); }
+@media (max-width: 700px) {
+  .deck { --pad-size: 44px; gap: 4px; padding: 8px 6px 7px; }
+  .deck-mark { display: none; }
+  .actionpad { width: 156px; height: 132px; }
+  .deck .arc-speed { width: 44px; height: 44px; }
+  .deck .arc-lift { width: 50px; height: 50px; left: 48px; top: 28px; }
+  .deck .arc-jump { width: 56px; height: 56px; left: 100px; }
+  .viewport, #game:fullscreen .viewport { height: min(73vw, calc(96dvh - 200px)); }
+  .keyline { display: none; }
+}
+@media (max-height: 600px) and (orientation: landscape) {
+  .deck { --pad-size: 44px; padding: 4px max(8px, env(safe-area-inset-right)) 4px max(8px, env(safe-area-inset-left)); }
+  .deck-label { display: none; }
+  .actionpad { width: 156px; height: 132px; }
+  .deck .arc-speed { width: 44px; height: 44px; }
+  .deck .arc-lift { width: 50px; height: 50px; left: 48px; top: 28px; }
+  .deck .arc-jump { width: 56px; height: 56px; left: 100px; }
+  .keyline { display: none; }
+  .viewport { height: calc(96dvh - 181px); }
+  #game:fullscreen .cabinet { width: 100vw; }
+  #game:fullscreen .viewport { height: calc(100dvh - 181px); }
+}

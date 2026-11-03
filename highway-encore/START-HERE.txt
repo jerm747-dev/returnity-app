@@ -1,0 +1,47 @@
+HIGHWAY ENCORE — STANDALONE GAME WORKSHOP v3
+
+Open index.html in this folder to launch the game directly.
+The title screen has Start the run and How to play buttons.
+
+KEYBOARD
+Move with Left/Right or A/D.
+Jump with Up, W, or Space. Hold to jump higher.
+Duck with Down or S.
+Hold Shift for speed.
+X lifts a flipped road character or throws the one being carried.
+P or Escape pauses and resumes.
+M opens the music player (only inside a Sound Arcade cabinet).
+
+TOUCH
+Slide around the four-way pad to change directions.
+Up jumps. Down ducks. Left/Right move.
+The action arc has Speed, Lift/Throw, and a larger gold Jump button.
+Speed toggles running. Direction and action buttons work together.
+
+EDITING
+index.html     Game markup, help dialog, HUD, and controller
+style.css      Standalone shell, menus, and HUD
+controls.css   Thumb control layout and responsive sizing
+interface.js   Input, sound, title/pause menus, and drawing loop
+game.js        Level data, movement, collision, enemies, and pickups
+cast.js        Drawn character artwork and animation
+road.js        Scenery, roadway, and mansion
+assets/        Required record icon
+
+The playable demo has five road character types, breakable crates,
+collectible notes, an eight-second Encore Disc, checkpoints, and a
+mansion flag finish. Checkpoints are retained for the current run.
+New runs and reloads reset progress. Sound is synthesized game effects.
+
+MUSIC IN THE ARCADE
+Inside a Sound Arcade cabinet, the title and pause screens show a Music
+button (M on a keyboard). It opens the arcade's music player over the
+paused game: the song that's playing, play/pause/skip, and the song list.
+Close it and the run is still waiting. Played on its own, the button
+stays hidden.
+
+For a paired installation, keep this folder named highway-encore under
+the player page. The parent INSTALL-PAIR.txt explains that layout.
+The player page's cast.js is the roster-preview snapshot. If the game
+character drawing API stays compatible, copying an updated cast.js to
+the player-page root also updates those preview portraits.

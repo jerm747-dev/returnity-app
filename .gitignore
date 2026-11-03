@@ -1,0 +1,20 @@
+node_modules/
+dist/
+apps/*/dist/
+
+# Made from your music folder and settings by npm run tracks / sync / build
+tracks.json
+apps/*/public/site.config.json
+apps/*/public/tracks.json
+apps/*/public/uploads/
+apps/games/public/projects/index.json
+
+# Your audio and uploaded images (big, and personal to each site)
+music/*
+!music/README.txt
+assets/uploads/*
+!assets/uploads/.gitkeep
+
+.DS_Store
+Thumbs.db
+*.log
