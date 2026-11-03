@@ -4,41 +4,57 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#241420">
-<title>Highway Encore · Standalone Game</title>
-<meta name="description" content="Nige Hood’s Highway Encore platformer workshop. Run, jump, flip the road crew, and reach the mansion flag.">
+<title>Highway Encore · Street Session</title>
+<meta name="description" content="Walk, run and flip through Nige Hood’s illustrated street. Explore the rooftops and meet one familiar face.">
 <link rel="icon" href="assets/record.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="controls.css">
+<link rel="stylesheet" href="street.css">
 </head><body>
-<main id="game" aria-label="Highway Encore game"><div class="cabinet"><div class="gamebar"><div class="gamebrand"><img src="assets/record.svg" width="27" height="27" alt=""> HIGHWAY ENCORE</div><div class="tools"><button id="audio" aria-label="Toggle sound" aria-pressed="false">Sound off</button><button id="pause">Pause</button><button id="expand" aria-label="Toggle full screen">⛶</button><button id="instructions" data-help aria-label="Game controls">?</button></div></div>
-<div class="viewport" id="viewport"><canvas id="playfield" tabindex="0" aria-label="Side-scrolling platform game. Move with arrow keys, jump with Space, duck with Down, run with Shift, lift and throw with X."></canvas><div class="hud" aria-hidden="true"><span id="stop">SIDE A</span><span id="score">♪ 00</span><span id="power" hidden></span></div><div class="meter" aria-hidden="true"><i id="progress"></i></div><div id="toast" role="status" aria-live="polite"></div><div class="overlay" id="overlay" hidden><div class="overbox"><div id="overKicker" class="eyebrow">RETURNITY ARCADE</div><h2 id="overTitle"></h2><p id="overText"></p><div class="links"><button id="primary" class="start"></button><button id="secondary" class="minor"></button><button id="music" class="minor" hidden>♪ Music</button></div></div></div></div>
+<main id="game" aria-label="Highway Encore game"><div class="cabinet"><div class="gamebar"><div class="gamebrand"><img src="assets/record.svg" width="27" height="27" alt=""> STREET SESSION</div><div class="tools"><button id="audio" aria-label="Toggle sound" aria-pressed="false">Sound off</button><button id="pause">Pause</button><button id="expand" aria-label="Toggle full screen">⛶</button><button id="instructions" data-help aria-label="Game controls">?</button></div></div>
+<div class="viewport" id="viewport"><canvas id="playfield" tabindex="0" aria-label="Street platform game. Move with arrows, jump with Space, flip with X, duck with Down, run with Shift. One optional conversation."></canvas><div class="hud" aria-hidden="true"><span id="stop">SIDE A</span><span id="score">♪ 00</span><span id="tokens">◉ 0</span></div><span class="route-label" id="route-label">THE SIDEWALK</span><div class="meter" aria-hidden="true"><i id="progress"></i></div><div id="toast" role="status" aria-live="polite"></div><section id="conversation" class="conversation" role="dialog" aria-modal="true" aria-labelledby="conversation-heading" hidden>
+<div class="conversation-heading"><span id="conversation-heading">A FAMILIAR FACE</span><span id="dialogue-count">1 / 6</span></div>
+<div class="conversation-cards">
+<article class="speaker-card" id="nige-card"><canvas id="nige-portrait" width="150" height="172" aria-hidden="true"></canvas><div><h3>Nige Hood</h3><p id="nige-line">…</p></div></article>
+<article class="speaker-card" id="npc-card"><canvas id="npc-portrait" width="150" height="172" aria-hidden="true"></canvas><div><h3>Open mic regular</h3><p id="npc-line">…</p></div></article>
+</div><div id="spoken-line" class="sr-only" aria-live="polite"></div>
+<div class="conversation-actions"><button id="leave-chat" class="minor">Keep walking</button><button id="next-line" class="start">Next →</button></div>
+</section><div class="overlay" id="overlay" hidden><div class="overbox"><div id="overKicker" class="eyebrow">RETURNITY ARCADE</div><h2 id="overTitle"></h2><p id="overText"></p><div class="links"><button id="primary" class="start"></button><button id="secondary" class="minor"></button></div><a class="classic-link" href="classic/index.html">Original highway demo ↗</a></div></div></div>
 <div class="deck" aria-label="Arcade touch controls">
   <div class="direction-control">
-    <div class="dpad" role="group" aria-label="Direction pad">
-      <button class="pad-up" aria-label="Up — jump" data-key="jump">▲</button>
-      <button class="pad-left" aria-label="Move left" data-key="left">◀</button>
-      <span class="pad-center" aria-hidden="true"><img src="assets/record.svg" alt=""></span>
-      <button class="pad-right" aria-label="Move right" data-key="right">▶</button>
-      <button class="pad-down" aria-label="Down — duck" data-key="down">▼</button>
+    <div class="dpad" role="group" aria-label="Eight-way direction pad. Slide toward a corner to combine two directions.">
+      <svg class="controller-defs" aria-hidden="true" width="0" height="0"><defs>
+        <linearGradient id="padBevel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8c9196"/><stop offset=".18" stop-color="#50565d"/><stop offset=".49" stop-color="#252a30"/><stop offset=".72" stop-color="#101419"/><stop offset="1" stop-color="#06080b"/></linearGradient>
+        <linearGradient id="padFace" x1="0" y1="0" x2=".65" y2="1"><stop stop-color="#383d43"/><stop offset=".45" stop-color="#272d33"/><stop offset="1" stop-color="#181d23"/></linearGradient>
+        <linearGradient id="padLit" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="#48655f"/><stop offset=".45" stop-color="#2a4842"/><stop offset="1" stop-color="#182d2c"/></linearGradient>
+        <filter id="padGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" seed="12" result="noise"/><feColorMatrix in="noise" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".48"/></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"/><feBlend in2="SourceGraphic" mode="soft-light"/></filter>
+      </defs></svg>
+      <svg class="direction-ring" viewBox="0 0 200 200" aria-hidden="true"><path data-directions="jump" d="M70.95 10.60 A94 94 0 0 1 129.05 10.60"/><path data-directions="jump right" d="M142.68 16.25 A94 94 0 0 1 183.75 57.32"/><path data-directions="right" d="M189.40 70.95 A94 94 0 0 1 189.40 129.05"/><path data-directions="down right" d="M183.75 142.68 A94 94 0 0 1 142.68 183.75"/><path data-directions="down" d="M129.05 189.40 A94 94 0 0 1 70.95 189.40"/><path data-directions="down left" d="M57.32 183.75 A94 94 0 0 1 16.25 142.68"/><path data-directions="left" d="M10.60 129.05 A94 94 0 0 1 10.60 70.95"/><path data-directions="jump left" d="M16.25 57.32 A94 94 0 0 1 57.32 16.25"/></svg>
+      <span class="pad-well" aria-hidden="true"></span>
+      <button class="pad-up" data-key="jump" aria-label="Up — jump" aria-pressed="false"><svg viewBox="0 0 100 116" aria-hidden="true" focusable="false"><path class="cap-edge" d="M17 4 Q3 5 3 21 L3 75 Q3 88 14 94 L43 111 Q50 115 57 111 L86 94 Q97 88 97 75 L97 21 Q97 5 83 4 Z"/><path class="cap-face" d="M19 10 Q11 11 11 23 L11 73 Q11 81 19 86 L46 101 Q50 104 54 101 L81 86 Q89 81 89 73 L89 23 Q89 11 81 10 Z"/><path class="cap-sheen" d="M18 13 Q13 15 13 24 L13 72 M20 12 L79 12 Q85 13 86 23"/><path class="cap-foot" d="M18 88 L44 104 Q50 108 56 104 L83 88"/></svg></button>
+      <button class="pad-right" data-key="right" aria-label="Move right" aria-pressed="false"><svg viewBox="0 0 100 116" aria-hidden="true" focusable="false"><path class="cap-edge" d="M17 4 Q3 5 3 21 L3 75 Q3 88 14 94 L43 111 Q50 115 57 111 L86 94 Q97 88 97 75 L97 21 Q97 5 83 4 Z"/><path class="cap-face" d="M19 10 Q11 11 11 23 L11 73 Q11 81 19 86 L46 101 Q50 104 54 101 L81 86 Q89 81 89 73 L89 23 Q89 11 81 10 Z"/><path class="cap-sheen" d="M18 13 Q13 15 13 24 L13 72 M20 12 L79 12 Q85 13 86 23"/><path class="cap-foot" d="M18 88 L44 104 Q50 108 56 104 L83 88"/></svg></button>
+      <button class="pad-down" data-key="down" aria-label="Down — duck" aria-pressed="false"><svg viewBox="0 0 100 116" aria-hidden="true" focusable="false"><path class="cap-edge" d="M17 4 Q3 5 3 21 L3 75 Q3 88 14 94 L43 111 Q50 115 57 111 L86 94 Q97 88 97 75 L97 21 Q97 5 83 4 Z"/><path class="cap-face" d="M19 10 Q11 11 11 23 L11 73 Q11 81 19 86 L46 101 Q50 104 54 101 L81 86 Q89 81 89 73 L89 23 Q89 11 81 10 Z"/><path class="cap-sheen" d="M18 13 Q13 15 13 24 L13 72 M20 12 L79 12 Q85 13 86 23"/><path class="cap-foot" d="M18 88 L44 104 Q50 108 56 104 L83 88"/></svg></button>
+      <button class="pad-left" data-key="left" aria-label="Move left" aria-pressed="false"><svg viewBox="0 0 100 116" aria-hidden="true" focusable="false"><path class="cap-edge" d="M17 4 Q3 5 3 21 L3 75 Q3 88 14 94 L43 111 Q50 115 57 111 L86 94 Q97 88 97 75 L97 21 Q97 5 83 4 Z"/><path class="cap-face" d="M19 10 Q11 11 11 23 L11 73 Q11 81 19 86 L46 101 Q50 104 54 101 L81 86 Q89 81 89 73 L89 23 Q89 11 81 10 Z"/><path class="cap-sheen" d="M18 13 Q13 15 13 24 L13 72 M20 12 L79 12 Q85 13 86 23"/><path class="cap-foot" d="M18 88 L44 104 Q50 108 56 104 L83 88"/></svg></button>
+      <span class="pad-center" aria-hidden="true"></span>
     </div>
-    <span class="deck-label" aria-hidden="true">DIRECTION</span>
+    <span class="deck-label">8-WAY DIRECTION</span>
   </div>
-  <div class="deck-mark" aria-hidden="true">NH<span>ENCORE</span></div>
+  <div class="deck-mark" aria-hidden="true">NH<span>HIGHWAY ENCORE</span><i></i></div>
   <div class="action-control">
     <div class="actionpad" role="group" aria-label="Action buttons">
-      <svg class="thumb-arc" viewBox="0 0 156 132" aria-hidden="true"><path d="M 19 115 Q 51 29 130 26"/><path d="M 19 123 Q 53 39 137 36"/></svg>
-      <button class="arc-speed" data-key="speed" aria-label="Toggle speed" aria-pressed="false"><span>Speed</span><i aria-hidden="true"></i></button>
-      <button class="arc-lift" data-key="lift" aria-label="Lift or throw"><span>Lift</span><small>THROW</small></button>
-      <button class="arc-jump" data-key="jump" aria-label="Jump"><span>Jump</span></button>
+      <span class="thumb-arc" aria-hidden="true"></span>
+      <button class="arc-speed" data-key="speed" aria-label="Speed — tap to turn on" aria-pressed="false"><span class="button-face"><span class="action-name">Speed</span><kbd>SHIFT</kbd><i class="speed-led" aria-hidden="true"></i></span></button>
+      <button class="arc-lift" data-key="flip" aria-label="Flip jump" aria-pressed="false"><span class="button-face"><span class="action-name">Flip</span><kbd>X</kbd></span></button>
+      <button class="arc-jump" data-key="jump" aria-label="Jump" aria-pressed="false"><span class="button-face"><span class="action-name">Jump</span><kbd>SPACE</kbd></span></button>
     </div>
-    <span class="deck-label" aria-hidden="true">ACTION</span>
+    <span class="deck-label">ACTION</span>
   </div>
 </div>
-<div class="keyline"><span><kbd>←</kbd><kbd>→</kbd> Move</span><span><kbd>↓</kbd> Duck</span><span><kbd>Space</kbd> Jump</span><span><kbd>Shift</kbd> Speed</span><span><kbd>X</kbd> Lift / throw</span><span><kbd>P</kbd> Pause</span></div></div></main>
-<dialog id="help" aria-labelledby="helpTitle"><div class="manual"><button class="close" data-close-help aria-label="Close controls">×</button><div class="eyebrow">FIELD MANUAL &nbsp;/&nbsp; 01</div><h2 id="helpTitle">How to play<span>.</span></h2><p>Get to the mansion flag. Roadside turntables save your place during the run.</p><dl><dt>Move</dt><dd>← → or A / D</dd><dt>Duck</dt><dd>↓ or S. Hold Down on the directional pad.</dd><dt>Jump</dt><dd>Space, ↑ or W. Hold to jump higher.</dd><dt>Speed</dt><dd>Hold Shift while moving.</dd><dt>Lift / throw</dt><dd>Stomp a rival, then press X nearby to lift it. Press X again to throw.</dd><dt>Pause</dt><dd>P or Escape</dd></dl><p>Touch players can slide around the four-way pad and tap an action with the other thumb. Up also jumps. Tap Speed to switch running on or off. Head-bump a gold record crate for eight seconds of Encore power.</p><button class="start" data-play>▶ &nbsp; Play the game</button></div></dialog>
-
-<script src="cast.js"></script>
-<script src="road.js"></script>
-<script src="game.js"></script>
-<script src="interface.js"></script>
+<div class="keyline"><span><kbd>←</kbd><kbd>→</kbd> Move</span><span><kbd>↓</kbd> Duck</span><span><kbd>Space</kbd> Jump</span><span><kbd>Shift</kbd> Speed</span><span><kbd>X</kbd> Flip</span><span><kbd>P</kbd> Pause</span></div></div></main>
+<dialog id="help" aria-labelledby="helpTitle"><div class="manual"><button class="close" data-close-help aria-label="Close controls">×</button><div class="eyebrow">STREET SESSION &nbsp;/&nbsp; 01</div><h2 id="helpTitle">Find your rhythm<span>.</span></h2><p>A quiet block to explore. Take the sidewalk, hop onto the crates, or climb the awnings and balconies. The camera follows you upward.</p><dl><dt>Move</dt><dd>← → or A / D</dd><dt>Jump</dt><dd>Space, ↑ or W. Release early for a shorter jump.</dd><dt>Flip</dt><dd>X. Start a tucked jump from the ground, or tuck once during a regular jump.</dd><dt>Speed</dt><dd>Hold Shift, or tap Speed to switch running on/off.</dd><dt>Duck</dt><dd>↓ or S</dd><dt>Pause</dt><dd>P or Escape</dd></dl><p>Walk near the person with the speech bubble to stop for a short chat. Everyone else keeps moving. Jump past them or choose Keep walking to skip. Finish the conversation to receive one merchant token for this run.</p><p>Touch: slide around the eight-way D-pad and use Jump or Flip with your other thumb. Upper corners jump and move together.</p><button class="start" data-play>▶ &nbsp; Start a new run</button></div></dialog>
+<script src="sprite-data.js"></script>
+<script src="street-game.js"></script>
+<script src="street-art.js"></script>
+<script src="controls-input.js"></script>
+<script src="street-interface.js"></script>
 </body></html>

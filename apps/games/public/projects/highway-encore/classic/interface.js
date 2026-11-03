@@ -3,7 +3,7 @@
 const $=s=>document.querySelector(s);
 const game=$('#game'),help=$('#help'),field=$('#playfield'),ctx=field.getContext('2d');
 let audio=null,soundOn=false,frameId=0,last=0,lag=0,worldWidth=800,dpr=1;
-let speedLock=false,postWin=false,pauseFrom='run',keyboard=new Set(),pointers=new Map();
+let postWin=false,pauseFrom='run';
 const labels={jump:[260,490,.09],flip:[300,630,.12],note:[620,930,.07],crack:[130,62,.08],discOut:[360,680,.14],tap:[150,115,.04],power:[460,920,.22],retry:[210,105,.16],save:[430,720,.16],win:[330,880,.4],pickup:[320,510,.12],throw:[520,200,.09]};
 function playSound(k){
  if(!soundOn||!audio||audio.state!=='running')return;const [from,to,len]=labels[k]||labels.note;
@@ -37,9 +37,7 @@ function frame(now){
  render();if(Highway.state.mode==='win'&&Highway.state.winTime>1.0&&!postWin){postWin=true;overlay('MANSION STAGE','Encore!','Flag raised. '+Highway.state.score+' points and '+Highway.state.stomps+' flips on the highway.','Play again',start,'Title screen',showTitle)}
  frameId=requestAnimationFrame(frame);
 }
-function clearHeld(){
- keyboard.clear();pointers.clear();speedLock=false;Highway.clearInput();for(const b of document.querySelectorAll('.deck button')){b.classList.remove('held');if(b.dataset.key==='speed')b.setAttribute('aria-pressed','false')}
-}
+function clearHeld(){ controller.clear(); Highway.clearInput(); }
 function start(){
  if(help.open)help.close();
  clearHeld();Highway.reset();postWin=false;$('#overlay').hidden=true;$('#pause').disabled=false;$('#pause').textContent='Pause';
@@ -71,87 +69,17 @@ help.addEventListener('close', () => {
 if(!game.requestFullscreen)$('#expand').hidden=true;else $('#expand').onclick=async()=>{try{
  if(document.fullscreenElement)await document.exitFullscreen();else await game.requestFullscreen();resize();field.focus({preventScroll:true})
  }catch{ $('#expand').hidden=true }};
-const mapping={ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',ArrowUp:'jump',KeyW:'jump',ArrowDown:'down',KeyS:'down',Space:'jump',KeyX:'lift',ShiftLeft:'speed',ShiftRight:'speed'};
-function stillDown(which){return [...keyboard].some(code=>mapping[code]===which)||[...pointers.values()].some(v=>v===which)||(which==='speed'&&speedLock)}
-window.addEventListener('keydown',e=>{
- 
- if(help.open)return;
- if(e.code==='KeyM'&&arcadeMusic){e.preventDefault();if(!e.repeat)$('#music').onclick();return}
- if(e.code==='KeyP'||e.code==='Escape'){e.preventDefault();if(!e.repeat)pause();return}
- const key=mapping[e.code];if(!key||Highway.state.mode!=='run')return;
- if(e.code==='Space'&&document.activeElement?.tagName==='BUTTON'&&!document.activeElement.closest('.deck'))return;
- e.preventDefault();if(!e.repeat&&!keyboard.has(e.code)){keyboard.add(e.code);Highway.press(key);syncControls()}
+const controller = EncoreInput.mount({
+ root: $('.deck'),
+ press: key => Highway.press(key),
+ release: key => Highway.release(key),
+ enabled: () => !help.open && Highway.state?.mode === 'run'
 });
-window.addEventListener('keyup',e=>{const key=mapping[e.code];if(!key)return;e.preventDefault();keyboard.delete(e.code);if(!stillDown(key))Highway.release(key);syncControls()});
-const controls = [...document.querySelectorAll('.deck [data-key]')];
-
-function syncControls() {
- for (const button of controls) {
-  const key = button.dataset.key;
-  button.classList.toggle('held', key !== 'speed' && stillDown(key));
-  if (key === 'speed') button.setAttribute('aria-pressed', String(speedLock));
- }
-}
-
-function toggleSpeed() {
- speedLock = !speedLock;
- if (speedLock) Highway.press('speed');
- else if (!stillDown('speed')) Highway.release('speed');
- syncControls();
-}
-
-function movePointer(id, key) {
- const previous = pointers.get(id);
- if (previous === key) return;
- pointers.set(id, key);
- if (previous && !stillDown(previous)) Highway.release(previous);
- if (key) Highway.press(key);
- syncControls();
-}
-
-function releasePointer(id) {
- if (!pointers.has(id)) return;
- const key = pointers.get(id);
- pointers.delete(id);
- if (key && !stillDown(key)) Highway.release(key);
- syncControls();
-}
-
-for (const button of controls) {
- const key = button.dataset.key;
- const directionPad = button.closest('.dpad');
- button.addEventListener('pointerdown', event => {
-  if (Highway.state?.mode !== 'run') return;
-  event.preventDefault();
-  button.setPointerCapture(event.pointerId);
-  if (key === 'speed') toggleSpeed();
-  else movePointer(event.pointerId, key);
- });
- // A thumb can move between directions without lifting from the pad.
- button.addEventListener('pointermove', event => {
-  if (!directionPad || !pointers.has(event.pointerId)) return;
-  const hovered = document.elementFromPoint(event.clientX, event.clientY)?.closest('[data-key]');
-  movePointer(event.pointerId, directionPad.contains(hovered) ? hovered.dataset.key : null);
- });
- for (const eventName of ['pointerup', 'pointercancel', 'lostpointercapture']) {
-  button.addEventListener(eventName, event => releasePointer(event.pointerId));
- }
- button.addEventListener('keydown', event => {
-  if (!['Space', 'Enter'].includes(event.code)) return;
-  event.preventDefault();
-  event.stopPropagation();
-  if (event.repeat || Highway.state?.mode !== 'run') return;
-  if (key === 'speed') toggleSpeed();
-  else movePointer('control-' + event.code, key);
- });
- button.addEventListener('keyup', event => {
-  if (!['Space', 'Enter'].includes(event.code)) return;
-  event.preventDefault();
-  event.stopPropagation();
-  releasePointer('control-' + event.code);
- });
- button.addEventListener('contextmenu', event => event.preventDefault());
-}
+window.addEventListener('keydown', event => {
+ if (help.open || !['KeyP','Escape'].includes(event.code)) return;
+ event.preventDefault();
+ if (!event.repeat) pause();
+});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&['run','retry'].includes(Highway.state.mode))pause()});
 window.addEventListener('blur',()=>{if(['run','retry'].includes(Highway.state.mode))pause()});
 function showTitle() {
@@ -172,23 +100,6 @@ function showTitle() {
  lag = 0;
  frameId = requestAnimationFrame(frame);
 }
-// Music: when this game runs inside a Sound Arcade cabinet, the cabinet keeps the site's music
-// playing and has a music player. Ask whether it's there; if it answers, the title and pause
-// screens get a Music button that opens it over the game. Played on its own, nothing changes.
-let arcadeMusic = false;
-const toArcade = type => { try { parent.postMessage({ type }, location.origin); } catch {} };
-window.addEventListener('message', event => {
- if (event.source !== parent || event.origin !== location.origin) return;
- const type = event.data && event.data.type;
- if (type === 'sound-arcade-music-ready') { arcadeMusic = true; $('#music').hidden = $('#overlay').hidden; }
- if (type === 'sound-arcade-music-closed') field.focus({ preventScroll: true });
-});
-$('#music').onclick = () => {
- if (['run', 'retry'].includes(Highway.state.mode)) pause();
- toArcade('sound-arcade-music-open');
-};
-new MutationObserver(() => { $('#music').hidden = !arcadeMusic || $('#overlay').hidden; }).observe($('#overlay'), { attributes: true, attributeFilter: ['hidden'] });
-if (parent !== window) toArcade('sound-arcade-music-hello');
 const launchOptions = new URLSearchParams(window.location.search);
 document.documentElement.classList.toggle('embedded', launchOptions.get('embedded') === '1');
 if (launchOptions.get('autostart') === '1') start();

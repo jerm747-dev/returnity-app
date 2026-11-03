@@ -1,47 +1,86 @@
-HIGHWAY ENCORE — STANDALONE GAME WORKSHOP v3
+HIGHWAY ENCORE — STREET SESSION
+Game workshop revision 5 / compatible with the v3 player-page pair
 
-Open index.html in this folder to launch the game directly.
-The title screen has Start the run and How to play buttons.
+OPEN THE DEMO
+Open index.html in this folder. Choose Start walking.
+For a website, upload the entire highway-encore folder beside the existing
+player page. No build, installation, external font, or CDN is required.
+All art and code are included; the game can also run from local files.
+
+WHAT THIS TEST DOES
+Explore one calm street with four moving pedestrians and no enemies.
+Walk, run, jump, duck, or make a tucked front flip. Climb floating wooden
+steps, awnings, balconies, and the rooftop. The camera follows vertically.
+The earlier broad-band gold-crate design is used for two reward blocks.
+Bump a gold crate from below to get five notes; each rewards only once.
+The end-of-block sign does not stop play: turn back and keep exploring.
+
+ONE OPTIONAL ENCOUNTER
+One of the first two pedestrians is selected at the start of each run.
+A speech bubble marks that person. Approach along the ground to chat.
+Nige and this person stop; all other pedestrians keep moving.
+Left/right portrait cards show the latest line from each participant.
+Finish the six-line open-mic conversation to receive one merchant token.
+Choose Keep walking or press Escape to leave early without a reward.
+Jump past the marked person or use an upper route to skip the encounter.
+Once completed, left, or bypassed, it will not interrupt that run again.
+The token is a demonstration counter. The merchant shop is not built yet.
+Tokens, notes, and encounter progress reset with a new run or reload.
 
 KEYBOARD
-Move with Left/Right or A/D.
-Jump with Up, W, or Space. Hold to jump higher.
-Duck with Down or S.
-Hold Shift for speed.
-X lifts a flipped road character or throws the one being carried.
-P or Escape pauses and resumes.
-M opens the music player (only inside a Sound Arcade cabinet).
+Left/Right or A/D: move
+Up, W, or Space: regular jump; hold for more height
+Shift: hold to run
+X: tucked front-flip jump, or tuck once during a regular jump
+Down or S: duck
+P: pause/resume
+Escape: leave the conversation, otherwise pause/resume
+Enter/Space: activate the focused conversation button
 
-TOUCH
-Slide around the four-way pad to change directions.
-Up jumps. Down ducks. Left/Right move.
-The action arc has Speed, Lift/Throw, and a larger gold Jump button.
-Speed toggles running. Direction and action buttons work together.
+TOUCH / POINTER
+Slide around the circular eight-way pad to change direction.
+Upper diagonals jump and move; lower diagonals duck and move.
+Both matching caps and the ring segment light up for diagonals.
+The center is neutral. Releasing the pad clears its inputs.
+The action arc has Speed, Flip, and Jump. Speed is a tap-on/tap-off latch.
+Use the pad and action buttons together with multiple fingers.
+Inputs clear on pause, dialogue, loss of focus, or a new run.
+Physical gamepad support is not included.
 
-EDITING
-index.html     Game markup, help dialog, HUD, and controller
-style.css      Standalone shell, menus, and HUD
-controls.css   Thumb control layout and responsive sizing
-interface.js   Input, sound, title/pause menus, and drawing loop
-game.js        Level data, movement, collision, enemies, and pickups
-cast.js        Drawn character artwork and animation
-road.js        Scenery, roadway, and mansion
-assets/        Required record icon
+ART AND ANIMATION STATUS
+The green outfit, white tee, and white sneakers are now in the game.
+First 16-frame walk and 16-frame run studies are included as PNG atlases.
+These are workshop animation studies, with room for gait/spacing cleanup.
+The regular jump uses one pose. The flip rotates the tucked pose once;
+it is not a hand-drawn 16-frame jump or flip animation yet.
+Platforms are placed against the painted street artwork. Some scenery
+people in that artwork are static; the four foreground walkers animate.
+Sound is optional synthesized effects, not album audio.
 
-The playable demo has five road character types, breakable crates,
-collectible notes, an eight-second Encore Disc, checkpoints, and a
-mansion flag finish. Checkpoints are retained for the current run.
-New runs and reloads reset progress. Sound is synthesized game effects.
+FILES TO WORKSHOP
+street-game.js       Movement, platforms, collision, encounter, rewards
+street-art.js        Canvas drawing, source crops, portraits, camera view
+sprite-data.js       Frame rectangles for the PNG artwork
+street-interface.js  Game loop, menus, dialogue UI, sound, input connection
+index.html           Game markup, dialogue, HUD, and help text
+street.css           Street theme and responsive conversation cards
+style.css            Shared game shell
+controls.css         Glossy controller, reflections, thumb layout
+controls-input.js    Eight-way pad and combined pointer/keyboard input
+controller.html      Interactive enlarged controller study
+assets/              Bundled PNG artwork and record icon
+classic/             Untouched previous highway/controller demo
 
-MUSIC IN THE ARCADE
-Inside a Sound Arcade cabinet, the title and pause screens show a Music
-button (M on a keyboard). It opens the arcade's music player over the
-paused game: the song that's playing, play/pause/skip, and the song list.
-Close it and the run is still waiting. Played on its own, the button
-stays hidden.
+INSTALL THIS UPDATE
+The ZIP retains Returnity-Workshop-v3/highway-encore/ for compatibility.
+Replace the highway-encore folder in your existing paired installation.
+Leave the player-page index.html, styles, scripts, and assets as they are.
+The existing player iframe continues to work with:
+highway-encore/index.html?embedded=1&autostart=1
+Hard-refresh after uploading if cached game files are still displayed.
+This ZIP does not change or publish the existing website.
 
-For a paired installation, keep this folder named highway-encore under
-the player page. The parent INSTALL-PAIR.txt explains that layout.
-The player page's cast.js is the roster-preview snapshot. If the game
-character drawing API stays compatible, copying an updated cast.js to
-the player-page root also updates those preview portraits.
+ORIGINAL DEMO
+The title screen links to classic/index.html. That folder preserves the
+previous highway demo, five road-character types, power-up, checkpoints,
+mansion finish, and its Lift/Throw controls.

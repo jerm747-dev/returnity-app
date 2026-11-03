@@ -1,68 +1,140 @@
-/* Thumb controls share the record artwork's ink, metallic gold, and teal. */
+/* Highway Encore controller — molded graphite and smoked-glass caps.
+   The artwork is live SVG/CSS: labels, highlights and states stay editable. */
 .deck {
-  --pad-size: 48px;
+  --pad: 176px;
+  --actions: 232px;
   display: flex;
   flex: 0 0 auto;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 10px clamp(10px, 3vw, 38px) 8px;
-  border-top: 1px solid #9e6a734d;
+  padding: 13px clamp(14px, 4vw, 44px) 11px;
+  position: relative;
+  isolation: isolate;
+  border-top: 1px solid #8c8a9270;
   background:
-    radial-gradient(ellipse at 0 100%, #622b4a66, transparent 60%),
-    radial-gradient(ellipse at 100% 0, #26676844, transparent 65%),
-    #2a1a2c;
+    radial-gradient(ellipse at 18% -20%, #83899038, transparent 65%),
+    radial-gradient(ellipse at 100% 100%, #080c1580, transparent 60%),
+    linear-gradient(165deg, #41444c, #2d3038 45%, #252731);
+  box-shadow: inset 0 2px 1px #ffffff14, inset 0 -3px 8px #11141b70;
 }
-.direction-control, .action-control { flex-shrink: 0; text-align: center; }
-.deck-label { display: block; margin-top: 4px; font: 8px ui-monospace, monospace; letter-spacing: .23em; color: #c4a0ab; }
-.dpad { position: relative; display: grid; gap: 0; grid-template: repeat(3, var(--pad-size)) / repeat(3, var(--pad-size)); border-radius: 50%; background: #160e1d; box-shadow: 0 0 0 1px #8d66734f, inset 0 2px 10px #0009; }
-.deck .dpad button { width: var(--pad-size); height: var(--pad-size); min-width: 0; min-height: 0; padding: 0; border: 1px solid #a48591; color: #ffe7bf; background: linear-gradient(#64455c, #442b43); font-size: 18px; text-shadow: 0 1px 1px #000; box-shadow: inset 0 2px 0 #b48d9b66, 0 3px 0 #170f1d; z-index: 1; }
-.pad-up { grid-area: 1 / 2; border-radius: 12px 12px 5px 5px!important; }
-.pad-left { grid-area: 2 / 1; border-radius: 12px 5px 5px 12px!important; }
-.pad-right { grid-area: 2 / 3; border-radius: 5px 12px 12px 5px!important; }
-.pad-down { grid-area: 3 / 2; border-radius: 5px 5px 12px 12px!important; }
-.pad-center { grid-area: 2 / 2; display: grid; place-items: center; background: #412a3f; }
-.pad-center img { width: 25px; opacity: .75; pointer-events: none; }
-.actionpad { width: 172px; height: 144px; display: block; position: relative; }
-.thumb-arc { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: #c5896a; stroke-width: 1; opacity: .35; pointer-events: none; }
-.thumb-arc path + path { stroke: #41b8b2; }
-.deck .actionpad button { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; border: 1px solid #e3c9ba88; border-radius: 50%; padding: 0; min-width: 0; min-height: 0; font: 800 11px Arial, sans-serif; text-transform: uppercase; letter-spacing: .02em; box-shadow: inset 0 2px 1px #ffffff3d, 0 4px 0 #120e1a, 0 6px 10px #120e1a77; }
-.actionpad small { font: 7px ui-monospace, monospace; letter-spacing: .04em; }
-.deck .arc-speed { width: 48px; height: 48px; left: 1px; bottom: 8px; background: #bd497b; color: #ffeddb; }
-.arc-speed i { width: 4px; height: 4px; margin-top: 3px; border-radius: 50%; background: #4e213d; }
-.deck .arc-lift { width: 54px; height: 54px; left: 53px; top: 31px; background: #60bfb4; color: #1e3034; }
-.deck .arc-jump { width: 62px; height: 62px; left: 110px; top: 4px; background: #ffc34a; color: #38232b; font-size: 12px; }
-.deck .dpad button.held, .deck .actionpad button.held { filter: brightness(1.16); transform: translateY(2px); box-shadow: inset 0 2px 5px #0005, 0 1px 0 #120e1a; }
-.deck .dpad button.held { background: #65c4b5; color: #1b2833; }
-.deck .arc-speed[aria-pressed=true] { background: #ec73a2; outline: 2px solid #ffdf91; outline-offset: 2px; color: #321526; }
-.arc-speed[aria-pressed=true] i { background: #ffed92; box-shadow: 0 0 5px #ffed92; }
-.deck-mark { color: #c5936d60; font: italic 800 28px Georgia, serif; text-align: center; letter-spacing: -.1em; }
-.deck-mark span { display: block; font: 7px ui-monospace, monospace; letter-spacing: .27em; margin-top: 4px; }
+.deck::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  opacity: .055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+.direction-control, .action-control { flex: 0 0 auto; text-align: center; }
+.deck-label { display: block; margin-top: 9px; font: 8px ui-monospace, monospace; letter-spacing: .22em; color: #b5b9c1; text-shadow: 0 1px 1px #11151c; }
+.controller-defs { position: absolute; pointer-events: none; }
+.dpad {
+  width: var(--pad); height: var(--pad); position: relative;
+  border-radius: 50%; touch-action: none; cursor: pointer;
+  background: radial-gradient(circle at 40% 25%, #383c44 25%, #262a32 68%, #141820 72%, #545a6370 74%, #20242c 77%, #1d2129 91%, #5a5f6555 94%, #151923 98%);
+  box-shadow: 0 2px 2px #9fa3a01f, inset 0 2px 5px #050911e0;
+}
+.direction-ring { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke-width: 2.1; pointer-events: none; }
+.direction-ring path { stroke: #727a875c; transition: stroke .08s, filter .08s; }
+.direction-ring path.lit { stroke: #9cebd8; filter: drop-shadow(0 0 3px #58e0ba); }
+.pad-well {
+  position: absolute; inset: 11%; border-radius: 28%;
+  background: #080c12;
+  clip-path: polygon(30% 0,70% 0,70% 30%,100% 30%,100% 70%,70% 70%,70% 100%,30% 100%,30% 70%,0 70%,0 30%,30% 30%);
+  filter: drop-shadow(0 3px 3px #000);
+}
+.deck .dpad button {
+  position: absolute; left: 32%; top: 7%; width: 36%; height: 40%;
+  min-width: 44px; min-height: 44px; padding: 0; border: 0; background: none;
+  transform-origin: 50% 107.5%; border-radius: 10px; z-index: 2;
+  -webkit-tap-highlight-color: transparent;
+}
+.dpad .pad-up { transform: rotate(0); }
+.dpad .pad-right { transform: rotate(90deg); }
+.dpad .pad-down { transform: rotate(180deg); }
+.dpad .pad-left { transform: rotate(270deg); }
+.dpad button svg { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 2px #000c); transition: translate .06s; }
+.cap-edge { fill: url(#padBevel); stroke: #070b10; stroke-width: 1.6; }
+.cap-face { fill: url(#padFace); filter: url(#padGrain); }
+.cap-sheen { stroke: #bec5cb; opacity: .32; stroke-width: 1.6; fill: none; }
+.cap-foot { stroke: #000; opacity: .75; stroke-width: 3.4; fill: none; }
+.dpad button.held svg { translate: 0 1.5px; filter: drop-shadow(0 1px 1px #000); }
+.dpad button.held .cap-face { fill: url(#padLit); }
+.dpad button.held .cap-sheen { stroke: #c8ffea; opacity: 1; filter: drop-shadow(0 0 2px #72f4cc); }
+.dpad button.held .cap-edge { stroke: #93e6cb; stroke-width: 1.2; }
+.pad-center { position: absolute; width: 9%; height: 9%; left: 45.5%; top: 45.5%; border-radius: 50%; background: radial-gradient(circle at 35% 20%, #323740, #171b23 70%); box-shadow: inset 0 1px 2px #000a; pointer-events: none; }
+.deck .dpad button:focus-visible { outline: 2px solid #bcffeb; outline-offset: 0; }
+.actionpad { width: var(--actions); height: var(--pad); position: relative; }
+.thumb-arc { position: absolute; inset: 14% 0 0 0; border-radius: 100% 0 0 0; border: 1px solid #bfc5cc10; border-right: 0; border-bottom: 0; pointer-events: none; }
+.deck .actionpad button {
+  position: absolute; padding: 4px; min-width: 44px; min-height: 44px;
+  display: block; border-radius: 50%; border: 1px solid #060a11;
+  color: var(--button-color); -webkit-tap-highlight-color: transparent;
+  background: conic-gradient(from 125deg, #131922, #070b12 15%, #02050a 36%, #aeb4b9 49%, #39414b 63%, #8e949b 75%, #0a0e15 88%, #131922);
+  box-shadow: 0 3px 2px #000c, 0 7px 10px #0007, 0 1px 0 2px #83899066;
+  transition: transform .06s, box-shadow .06s;
+}
+.button-face {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; width: 100%; height: 100%; border-radius: 50%;
+  isolation: isolate; overflow: hidden; gap: 3px;
+  background: radial-gradient(ellipse at 50% 82%, #39454d 0%, #242e35 42%, #192128 74%, #121a22);
+  border: 1px solid #7f8c9466;
+  box-shadow: inset 0 2px 2px #edf3f588, inset 2px 0 3px #a7bec52e, inset 0 -3px 3px #050d11cf;
+}
+/* Separate rectangular softbox and curved rim reflections mimic convex caps. */
+.button-face::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(176deg, transparent 2%, #f3f5f5a6 3%, #d2d5d56b 28%, #d5d6d45c 44%, #929fa630 46%, transparent 47%);
+  transform: rotate(var(--reflection-angle, 0deg)) translateY(var(--reflection-shift, 0%));
+  transform-origin: center;
+}
+.button-face::after {
+  content: ''; position: absolute; inset: 2px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(ellipse at 24% 12%, #ffffffe0 0, #ffffff44 3%, transparent 14%);
+  border: 1px solid transparent; border-top-color: #e1e9ed70; border-left-color: #e1e9ed24;
+}
+.action-name { font: 800 clamp(11px, 1.45vw, 16px)/1 Arial, sans-serif; letter-spacing: -.025em; text-shadow: 0 1px 2px #000e, 0 0 8px #0007; z-index: 1; }
+.action-second { display: block; margin-top: 2px; font-size: .75em; letter-spacing: -.02em; }
+.actionpad kbd { font: 8px/1 ui-monospace, Consolas, monospace; color: #f1f3f3bd; letter-spacing: .04em; text-shadow: 0 1px 2px #000; z-index: 1; }
+.deck .arc-speed { --button-color: #ffa7cc; --reflection-angle: 10deg; --reflection-shift: 5%; width: 29%; height: auto; aspect-ratio: 1; left: 0; bottom: 7%; }
+.deck .arc-lift { --button-color: #9ef0dc; --reflection-angle: -9deg; --reflection-shift: -6%; width: 32%; height: auto; aspect-ratio: 1; left: 31%; top: 26%; }
+.deck .arc-jump { --button-color: #ffdc91; --reflection-angle: -3deg; --reflection-shift: 1%; width: 36%; height: auto; aspect-ratio: 1; right: 0; top: 1%; }
+.speed-led { display: block; position: absolute; width: 4px; height: 4px; border-radius: 50%; bottom: 11%; background: #402b38; box-shadow: 0 0 0 1px #0c1218; }
+.arc-speed[data-latched=true] .speed-led { background: #ffd091; box-shadow: 0 0 5px #ffb66b; }
+.deck .actionpad button.held { transform: translateY(2px); box-shadow: 0 1px 1px #000e, 0 2px 4px #0009, 0 0 0 1px var(--button-color); }
+.actionpad button.held .button-face { box-shadow: inset 0 2px 5px #0007, inset 0 0 6px #ffffff28; border-color: var(--button-color); }
+.actionpad button.held .action-name { text-shadow: 0 0 6px currentColor, 0 1px 2px #000; }
+.actionpad button:focus-visible { outline: 2px solid var(--button-color); outline-offset: 4px; }
+.deck-mark { color: #bfc4cd45; font: italic 800 29px Georgia, serif; text-align: center; letter-spacing: -.1em; text-shadow: 0 1px 1px #050b1680; }
+.deck-mark span { display: block; font: 7px ui-monospace, monospace; letter-spacing: .17em; margin-top: 5px; }
+.deck-mark i { display: block; width: 3px; height: 3px; margin: 11px auto 0; background: #a4e7ce; box-shadow: 0 0 5px #87e5bd; border-radius: 50%; }
 .cabinet { display: flex; flex-direction: column; max-height: calc(96dvh - 2px); width: 100%; }
 .gamebar, .keyline { flex: 0 0 auto; }
-.viewport { flex: 1 1 auto; min-height: 0; height: min(44vw, calc(96dvh - 258px)); aspect-ratio: auto; }
+.viewport { flex: 1 1 auto; min-height: 0; height: min(44vw, calc(96dvh - 298px)); aspect-ratio: auto; }
 #game { width: min(1020px, 96vw); }
 #game:fullscreen .cabinet { width: min(1120px, 100vw); max-height: 100dvh; }
-#game:fullscreen .viewport { height: min(49vw, calc(100dvh - 258px)); }
+#game:fullscreen .viewport { height: min(49vw, calc(100dvh - 298px)); }
 @media (max-width: 700px) {
-  .deck { --pad-size: 44px; gap: 4px; padding: 8px 6px 7px; }
+  .deck { --pad: clamp(132px, 39vw, 176px); --actions: clamp(152px, 44vw, 205px); gap: 4px; padding: 10px 6px 8px; }
   .deck-mark { display: none; }
-  .actionpad { width: 156px; height: 132px; }
-  .deck .arc-speed { width: 44px; height: 44px; }
-  .deck .arc-lift { width: 50px; height: 50px; left: 48px; top: 28px; }
-  .deck .arc-jump { width: 56px; height: 56px; left: 100px; }
-  .viewport, #game:fullscreen .viewport { height: min(73vw, calc(96dvh - 200px)); }
+  .deck-label { font-size: 7px; margin-top: 7px; }
+  .action-name { font-size: clamp(10px, 3.05vw, 14px); }
+  .actionpad kbd { font-size: 6px; }
+  .deck .actionpad button { padding: 3px; }
+  .button-face { gap: 3px; }
+  .speed-led { width: 3px; height: 3px; bottom: 9%; }
+  .viewport, #game:fullscreen .viewport { height: min(78vw, calc(96dvh - 250px)); }
   .keyline { display: none; }
 }
 @media (max-height: 600px) and (orientation: landscape) {
-  .deck { --pad-size: 44px; padding: 4px max(8px, env(safe-area-inset-right)) 4px max(8px, env(safe-area-inset-left)); }
+  .deck { --pad: 132px; --actions: 168px; padding: 5px max(8px, env(safe-area-inset-right)) 5px max(8px, env(safe-area-inset-left)); }
   .deck-label { display: none; }
-  .actionpad { width: 156px; height: 132px; }
-  .deck .arc-speed { width: 44px; height: 44px; }
-  .deck .arc-lift { width: 50px; height: 50px; left: 48px; top: 28px; }
-  .deck .arc-jump { width: 56px; height: 56px; left: 100px; }
+  .action-name { font-size: 11px; }
+  .actionpad kbd { font-size: 7px; }
   .keyline { display: none; }
-  .viewport { height: calc(96dvh - 181px); }
+  .viewport { height: calc(96dvh - 184px); }
   #game:fullscreen .cabinet { width: 100vw; }
-  #game:fullscreen .viewport { height: calc(100dvh - 181px); }
+  #game:fullscreen .viewport { height: calc(100dvh - 184px); }
+  .overbox p { font-size: 12px; }
 }
+@media (prefers-reduced-motion: reduce) { .deck *, .deck *::before, .deck *::after { transition: none!important; } }
