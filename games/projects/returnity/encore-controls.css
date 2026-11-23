@@ -1,0 +1,199 @@
+/* Highway Encore controller — molded graphite and smoked-glass caps.
+   The artwork is live SVG/CSS: labels, highlights and states stay editable. */
+.touchdeck {
+  --pad: 176px;
+  --actions: 232px;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px clamp(14px, 4vw, 44px) 11px;
+  position: relative;
+  isolation: isolate;
+  border-top: 1px solid #8c8a9270;
+  background:
+    radial-gradient(ellipse at 18% -20%, #83899038, transparent 65%),
+    radial-gradient(ellipse at 100% 100%, #080c1580, transparent 60%),
+    linear-gradient(165deg, #41444c, #2d3038 45%, #252731);
+  box-shadow: inset 0 2px 1px #ffffff14, inset 0 -3px 8px #11141b70;
+}
+.touchdeck::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  opacity: .055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+.direction-control, .action-control { flex: 0 0 auto; text-align: center; }
+/* The browser's tap tint belongs to the whole touch target by default.
+   Keep feedback on the existing SVG caps and direction arcs instead. */
+.touchdeck, .touchdeck *, .touchdeck *::before, .touchdeck *::after {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.controller-defs { position: absolute; pointer-events: none; }
+.dpad {
+  width: var(--pad); height: var(--pad); position: relative;
+  border-radius: 50%; touch-action: none; cursor: pointer;
+  background: radial-gradient(circle at 40% 25%, #383c44 25%, #262a32 68%, #141820 72%, #545a6370 74%, #20242c 77%, #1d2129 91%, #5a5f6555 94%, #151923 98%);
+  box-shadow: 0 2px 2px #9fa3a01f, inset 0 2px 5px #050911e0;
+}
+.direction-ring { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke-width: 2.1; pointer-events: none; }
+.direction-ring path { stroke: #727a875c; transition: stroke .08s, filter .08s; }
+.direction-ring path.lit { stroke: #9cebd8; filter: drop-shadow(0 0 3px #58e0ba); }
+.pad-well {
+  position: absolute; inset: 11%; border-radius: 28%;
+  background: #080c12;
+  clip-path: polygon(30% 0,70% 0,70% 30%,100% 30%,100% 70%,70% 70%,70% 100%,30% 100%,30% 70%,0 70%,0 30%,30% 30%);
+  filter: drop-shadow(0 3px 3px #000);
+}
+.touchdeck .dpad button {
+  position: absolute; left: 32%; top: 7%; width: 36%; height: 40%;
+  min-width: 44px; min-height: 44px; padding: 0; border: 0; background: none;
+  transform-origin: 50% 107.5%; border-radius: 10px; z-index: 2;
+  -webkit-tap-highlight-color: transparent;
+}
+.dpad .pad-up { transform: rotate(0); }
+.dpad .pad-right { transform: rotate(90deg); }
+.dpad .pad-down { transform: rotate(180deg); }
+.dpad .pad-left { transform: rotate(270deg); }
+.dpad button svg { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 2px #000c); transition: translate .06s; }
+.cap-edge { fill: url(#padBevel); stroke: #070b10; stroke-width: 1.6; }
+.cap-face { fill: url(#padFace); filter: url(#padGrain); }
+.cap-sheen { stroke: #bec5cb; opacity: .32; stroke-width: 1.6; fill: none; }
+.cap-foot { stroke: #000; opacity: .75; stroke-width: 3.4; fill: none; }
+.dpad button.held svg { translate: 0 1.5px; filter: drop-shadow(0 1px 1px #000); }
+.dpad button.held .cap-face { fill: url(#padLit); }
+.dpad button.held .cap-sheen { stroke: #c8ffea; opacity: 1; filter: drop-shadow(0 0 2px #72f4cc); }
+.dpad button.held .cap-edge { stroke: #93e6cb; stroke-width: 1.2; }
+.pad-center { position: absolute; width: 9%; height: 9%; left: 45.5%; top: 45.5%; border-radius: 50%; background: radial-gradient(circle at 35% 20%, #323740, #171b23 70%); box-shadow: inset 0 1px 2px #000a; pointer-events: none; }
+.touchdeck .dpad button:focus-visible { outline: none; }
+.touchdeck .dpad button:focus-visible .cap-edge { stroke: #bcffeb; stroke-width: 3; }
+.touchdeck .dpad button:focus-visible .cap-sheen { opacity: 1; stroke: #bcffeb; }
+.actionpad { width: var(--actions); height: var(--pad); position: relative; }
+.thumb-arc { position: absolute; inset: 14% 0 0 0; border-radius: 100% 0 0 0; border: 1px solid #bfc5cc10; border-right: 0; border-bottom: 0; pointer-events: none; }
+.touchdeck .actionpad button {
+  position: absolute; padding: 4px; min-width: 44px; min-height: 44px;
+  display: block; border-radius: 50%; border: 1px solid #060a11;
+  color: var(--button-color); -webkit-tap-highlight-color: transparent;
+  background: conic-gradient(from 125deg, #131922, #070b12 15%, #02050a 36%, #aeb4b9 49%, #39414b 63%, #8e949b 75%, #0a0e15 88%, #131922);
+  box-shadow: 0 3px 2px #000c, 0 7px 10px #0007, 0 1px 0 2px #83899066;
+  transition: transform .06s, box-shadow .06s;
+}
+.button-face {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; width: 100%; height: 100%; border-radius: 50%;
+  isolation: isolate; overflow: hidden; gap: 3px;
+  background: radial-gradient(ellipse at 50% 82%, #39454d 0%, #242e35 42%, #192128 74%, #121a22);
+  border: 1px solid #7f8c9466;
+  box-shadow: inset 0 2px 2px #edf3f588, inset 2px 0 3px #a7bec52e, inset 0 -3px 3px #050d11cf;
+}
+/* Separate rectangular softbox and curved rim reflections mimic convex caps. */
+.button-face::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(176deg, transparent 2%, #f3f5f5a6 3%, #d2d5d56b 28%, #d5d6d45c 44%, #929fa630 46%, transparent 47%);
+  transform: rotate(var(--reflection-angle, 0deg)) translateY(var(--reflection-shift, 0%));
+  transform-origin: center;
+}
+.button-face::after {
+  content: ''; position: absolute; inset: 2px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(ellipse at 24% 12%, #ffffffe0 0, #ffffff44 3%, transparent 14%);
+  border: 1px solid transparent; border-top-color: #e1e9ed70; border-left-color: #e1e9ed24;
+}
+.action-name { font: 800 clamp(11px, 1.45vw, 16px)/1 Arial, sans-serif; letter-spacing: -.025em; text-shadow: 0 1px 2px #000e, 0 0 8px #0007; z-index: 1; }
+
+.actionpad kbd { min-width:0;height:auto;padding:0;border:0;background:none; font: 8px/1 ui-monospace, Consolas, monospace; color: #f1f3f3bd; letter-spacing: .04em; text-shadow: 0 1px 2px #000; z-index: 1; }
+.touchdeck .arc-backup { --button-color: #ffa7cc; --reflection-angle: 10deg; --reflection-shift: 5%; width: 29%; height: auto; aspect-ratio: 1; left: 0; bottom: 7%; }
+.touchdeck .arc-strike { --button-color: #9ef0dc; --reflection-angle: -9deg; --reflection-shift: -6%; width: 32%; height: auto; aspect-ratio: 1; left: 31%; top: 26%; }
+.touchdeck .arc-jump { --button-color: #ffdc91; --reflection-angle: -3deg; --reflection-shift: 1%; width: 36%; height: auto; aspect-ratio: 1; right: 0; top: 1%; }
+
+.touchdeck .actionpad button.held { transform: translateY(2px); box-shadow: 0 1px 1px #000e, 0 2px 4px #0009, 0 0 0 1px var(--button-color); }
+.actionpad button.held .button-face { box-shadow: inset 0 2px 5px #0007, inset 0 0 6px #ffffff28; border-color: var(--button-color); }
+.actionpad button.held .action-name { text-shadow: 0 0 6px currentColor, 0 1px 2px #000; }
+.actionpad button:focus-visible { outline: 2px solid var(--button-color); outline-offset: 4px; }
+/* Fourth cap uses the open space above Speed; the three existing caps stay put. */
+.touchdeck .arc-fire{--button-color:#ffbc7e;--reflection-angle:8deg;width:25%;height:auto;aspect-ratio:1;left:0;top:1%}
+
+.arc-fire .action-name{font-size:clamp(10px,1.1vw,13px)}
+
+
+/* The action arc and direction caps are the Encore controller artwork. */
+.touchdeck { --pad:clamp(134px,17vmin,174px); --actions:calc(var(--pad)*1.3);
+  margin:0; width:100%; gap:0; padding:9px max(10px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));
+  touch-action:none; -webkit-user-select:none; user-select:none; }
+.touchdeck .dpad button {height:40%;width:36%;min-height:0;min-width:0}
+.touchdeck .actionpad button {padding:3px}
+.touchdeck .arc-fire {min-width:44px;min-height:44px}
+.touchdeck .arc-jump,.touchdeck .arc-backup,.touchdeck .arc-strike,.touchdeck .arc-fire {aspect-ratio:1}
+.touchdeck .action-name {font-size:clamp(11px,1.6vmin,16px)}
+.touchdeck .actionpad kbd {font-size:10px;color:#f4eee5}
+@media(max-width:358px){.touchdeck {--pad:126px;--actions:156px;padding-inline:4px}}
+@media(orientation:landscape){
+ .touchdeck {position:absolute;z-index:3;inset:auto 0 0;pointer-events:none;
+   padding:0 max(10px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));
+   background:none;border:0;box-shadow:none;--pad:clamp(112px,23dvh,156px);--actions:calc(var(--pad)*1.36);}
+ .touchdeck::before {display:none}
+ .touchdeck .dpad,.touchdeck .actionpad button {pointer-events:auto}
+ .touchdeck .thumb-arc {display:none}
+}
+@media(prefers-reduced-motion:reduce){.touchdeck *,.touchdeck *::before,.touchdeck *::after{transition:none!important}}
+
+.touchdeck.inactive{opacity:.55}
+@media(orientation:landscape){.touchdeck.inactive{visibility:hidden}}
+
+/* The world continues under the translucent deck with one continuous tint. */
+.playing .touchdeck {
+  --deck-rgb: 44, 41, 56;
+  --feather: clamp(28px, 5dvh, 56px);
+  position: absolute;
+  z-index: 3;
+  inset: auto 0 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  pointer-events: none;
+}
+.playing .touchdeck::before {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: calc(-1 * var(--feather)) 0 0;
+  opacity: 1;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    rgba(var(--deck-rgb), 0),
+    rgba(var(--deck-rgb), .14) 17%,
+    rgba(var(--deck-rgb), .48) 43%,
+    rgba(var(--deck-rgb), .76) 73%,
+    rgba(var(--deck-rgb), .84) 94%);
+}
+.playing .touchdeck .thumb-arc { display: none; }
+.playing .arc-backup .action-name { font-size: clamp(9px, 1.35vmin, 13px); }
+.playing .touchdeck .dpad, .playing .touchdeck .actionpad button { pointer-events: auto; }
+.playing .touchdeck.inactive { visibility: hidden; }
+@media (orientation: portrait) {
+  .playing .prompt {
+    bottom: calc(clamp(134px, 17vmin, 174px) + max(19px, env(safe-area-inset-bottom)) + 6px);
+    width: max-content;
+    max-width: 92%;
+  }
+}
+@media (orientation: landscape) {
+  .playing .prompt {
+    z-index: 4;
+    bottom: max(13px, env(safe-area-inset-bottom));
+    width: max-content;
+    max-width: min(46%, calc(100vw - 2 * clamp(149px, 31.28dvh, 213px)));
+  }
+  .playing .touchdeck::before {
+    background: linear-gradient(to bottom,
+      rgba(var(--deck-rgb), 0),
+      rgba(var(--deck-rgb), .10) 22%,
+      rgba(var(--deck-rgb), .40) 60%,
+      rgba(var(--deck-rgb), .71));
+  }
+}

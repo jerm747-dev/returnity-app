@@ -1,0 +1,75 @@
+/* Frosted enclosure and water-glass controls. */
+:host([data-skin=ice]) { background:radial-gradient(ellipse at 50% 8%,#2f5a78,#0b1b2b 78%); }
+.device[data-skin=ice] { --s1:#cfeefc;--s2:#8cc9e6;--s3:#4f93b8;--ink:#f2fbff;--ink-dim:#d7f1ff;--bezel:#0d2638; }
+.device[data-skin=ice] .shell-body {
+  background:
+    radial-gradient(ellipse at 18% -4%, #ffffffb0, transparent 46%),
+    radial-gradient(ellipse at 82% 112%, #0a3a5c66, transparent 58%),
+    repeating-linear-gradient(115deg, #ffffff10 0 .5em, transparent .5em 2.4em),
+    linear-gradient(172deg, var(--s1), var(--s2) 52%, var(--s3));
+  box-shadow:
+    inset 0 .5em .4em #ffffffa0, inset .4em 0 .7em #ffffff40, inset 0 -1.2em 1.6em #0b4a7055,
+    0 .7em 1.2em #021018aa, 0 3.5em 7em #000c;
+}
+.device[data-skin=ice] .shell-body::after { background:#2a6a9040; box-shadow:0 .2em 0 #ffffff70; }
+.device[data-skin=ice] .shoulder { background:linear-gradient(180deg,#e6f8ff,#7fc0e0 60%); color:#0e3550;
+  border-color:#2d6f93; box-shadow:inset 0 .35em .2em #ffffffc0,0 .3em .5em #0006; }
+.device[data-skin=ice] .shoulder.held { background:linear-gradient(180deg,#a8ecff,#3fa3d0 60%); }
+.device[data-skin=ice] .bezel { background:linear-gradient(170deg,#163a52,var(--bezel) 40%,#081a28);
+  box-shadow:inset 0 .25em .3em #9fe3ff33, inset 0 -.4em .6em #0008, 0 .35em .2em #ffffff66, 0 -.2em .3em #0003; }
+.device[data-skin=ice] .bezel-title,.device[data-skin=ice] .led-group b { color:#8fd3f2; }
+.device[data-skin=ice] .led.power { background:#7fe6ff; box-shadow:0 0 .9em #3fd0ff; }
+.device[data-skin=ice] .screen { box-shadow:0 0 0 .3em #06141f,0 .15em .3em #bfefff55; }
+.device[data-skin=ice] .guide-button { background:#123247; border-color:#4b8fb3; color:#dff6ff; }
+.device[data-skin=ice] .wordmark b { color:#f5fcff; text-shadow:0 .05em .06em #fff,0 -.06em .08em #2a6a90,0 .1em .3em #1b5b8066; }
+.device[data-skin=ice] .grille { background:radial-gradient(circle,#0b3b5a90 .75em,#ffffff50 .9em,transparent 1.05em) 0 0 / 3.15em 3.15em; }
+.device[data-skin=ice] .system-btn span { color:#0f3a56; }
+.device[data-skin=ice] .system-btn i { border-color:#2c6b8e; background:linear-gradient(180deg,#f2fbff,#8ccbe8);
+  box-shadow:inset 0 .2em .2em #fff,0 .35em .3em #0b3b5a88; }
+.device[data-skin=ice] .cartridge { background:repeating-linear-gradient(90deg,#9fd6ee 0 .44em,#86c4e0 .44em .58em,#b8e4f6 .58em .7em);
+  border-color:#2d6f93; box-shadow:inset 0 .24em .18em #ffffffa0,0 .45em .45em #0009; }
+.device[data-skin=ice] .eject { color:#0f3a56; border-color:#2d6f93; background:linear-gradient(160deg,#eefaff,#8ccbe8); }
+.device[data-skin=ice] .cartridge-slot { background:linear-gradient(180deg,transparent 62%,#0c2a3e 65%,#051320 86%,#5c9cc0 96%); }
+
+/* D-pad: frosted ice caps over a deep-water well. */
+.device[data-skin=ice] .dpad { background:radial-gradient(circle at 40% 25%,#bfe9fb 25%,#7cc0e0 68%,#2f7aa3 72%,#e0f7ff90 74%,#5ea7cc 77%,#4a95bd 91%,#ffffff70 94%,#2c7099 98%);
+  box-shadow:0 2px 2px #ffffff60, inset 0 2px 5px #0b3b5a90; }
+.device[data-skin=ice] .pad-well { background:#06263a; }
+.device[data-skin=ice] .cap-edge { fill:#5aa9d1; stroke:#1d5d82; }
+.device[data-skin=ice] .cap-face { fill:#d9f4ff; filter:none; opacity:.92; }
+.device[data-skin=ice] .cap-sheen { stroke:#fff; opacity:.85; }
+.device[data-skin=ice] .cap-foot { stroke:#1d5d82; opacity:.6; }
+.device[data-skin=ice] .dpad button.held .cap-face { fill:#8fe4ff; }
+.device[data-skin=ice] .dpad button.held .cap-edge { stroke:#e8fbff; }
+.device[data-skin=ice] .direction-ring path { stroke:#ffffff55; }
+.device[data-skin=ice] .direction-ring path.lit { stroke:#e9fdff; filter:drop-shadow(0 0 3px #6fe3ff); }
+.device[data-skin=ice] .pad-center { background:radial-gradient(circle at 35% 20%,#e9f9ff,#7cbfe0 70%); }
+
+/* Face buttons: the same glossy convex cap, made of water. Translucent blue
+   glass with a bright rim reflection and a caustic glow from below. */
+.device[data-skin=ice] .faces .face {
+  border-color:#1d5d82;
+  background:conic-gradient(from 125deg,#7fc3e3,#3c88b2 15%,#245f86 36%,#f4fdff 49%,#7fc3e3 63%,#e2f7ff 75%,#3c88b2 88%,#7fc3e3);
+  box-shadow:0 .45em .3em #0b3b5a99,0 .9em 1.4em #0b3b5a55,0 0 0 .3em #ffffff30;
+}
+.device[data-skin=ice] .button-face {
+  color:#f4fdff;
+  background:
+    radial-gradient(ellipse at 50% 92%, #9ff1ffcc 0%, #3cc4f099 24%, transparent 55%),
+    radial-gradient(ellipse at 50% 40%, #2a9fd680, #0f6fa8a8 62%, #0a4f80c4);
+  border:1px solid #c9f3ff99;
+  box-shadow:inset 0 2px 3px #ffffffcc, inset 0 -4px 6px #04304f99, 0 0 .6em #47d4ff40;
+  -webkit-backdrop-filter:blur(3px) saturate(1.4); backdrop-filter:blur(3px) saturate(1.4);
+}
+.device[data-skin=ice] .button-face::before {
+  background:linear-gradient(176deg,transparent 2%,#ffffffd0 3%,#e6fbffa0 26%,#c8f2ff70 44%,#7fd6f840 46%,transparent 47%);
+}
+.device[data-skin=ice] .button-face::after {
+  background:radial-gradient(ellipse at 26% 14%,#fff 0,#ffffff80 4%,transparent 16%),
+             radial-gradient(ellipse at 70% 84%,#bff6ff66 0,transparent 30%);
+  border-top-color:#ffffffb0; border-left-color:#ffffff50;
+}
+.device[data-skin=ice] .face-letter { color:#e9fbffdd; text-shadow:0 1px 2px #04304f; }
+.device[data-skin=ice] .action-name { color:#ffffff; text-shadow:0 1px 2px #04304f,0 0 8px #0a6fa8; }
+.device[data-skin=ice] .faces .face.held { box-shadow:0 .15em .15em #0b3b5a,0 .3em .6em #0b3b5a99,0 0 0 .15em #bff4ff,0 0 1.2em #5fe0ff88; }
+.device[data-skin=ice] .faces .face.held .button-face { background:radial-gradient(ellipse at 50% 70%,#c9fbffe0,#43c9f2c0 45%,#0f6fa8d0); border-color:#fff; }

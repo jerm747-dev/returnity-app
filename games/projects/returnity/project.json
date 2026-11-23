@@ -1,0 +1,34 @@
+{
+  "title": "Returnity",
+  "tagline": "Nige Hood · The Beginning · After Hours",
+  "description": "Run the block as Closet Nigel, hand out your CDs and face FEAR at the open mic in the first chapter of Nige Hood’s playable autobiography. Plays in the Returnity Edition Pocket Player; press SELECT on the Pocket for themes and options.",
+  "order": 0,
+  "kind": "game",
+  "status": "prototype",
+  "accent": "#e8a463",
+  "controls": ["gamepad", "keyboard", "touch"],
+  "credit": "Nige Hood · Returnity story and supplied character art. Game by Jerm747 Games.",
+  "version": "0.3.0",
+  "controllerMode": "native",
+  "actions": [
+    { "id": "left", "label": "Move left", "key": "ArrowLeft" },
+    { "id": "right", "label": "Move right", "key": "ArrowRight" },
+    { "id": "up", "label": "Move up", "key": "ArrowUp" },
+    { "id": "down", "label": "Move down", "key": "ArrowDown" },
+    { "id": "jump", "label": "Jump", "key": "z", "pad": "A" },
+    { "id": "shot", "label": "Fire", "key": "c", "pad": "B" },
+    { "id": "strike", "label": "Strike / hold to lift", "key": "x", "pad": "X" },
+    { "id": "special", "label": "Call backup", "key": "v", "pad": "Y" },
+    { "id": "pause", "label": "Pause", "key": "p", "pad": "START" }
+  ],
+  "pocket": {
+    "mode": "gamepad",
+    "default": true,
+    "labels": { "a": "Jump", "b": "Fire", "x": "Strike", "y": "Backup" },
+    "hint": "D-pad moves. A jumps, X strikes (hold to lift), B throws fire, Y calls backup. START pauses; A confirms menus.",
+    "hide": ".mast,.cartridge,.touchdeck,.deck,footer",
+    "css": "html,body{overflow:hidden!important;background:#101119!important}.cabinet,.cabinet.playing{width:100%!important;max-width:none!important;height:100dvh!important;margin:0!important;padding:0!important;display:block!important}.machine{height:100%!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}.glass{height:100%!important;padding:0!important;border:0!important;border-radius:0!important}.screen,.screen[data-mode]{aspect-ratio:auto!important;height:100%!important;min-height:0!important}",
+    "ratio": 1.3333,
+    "width": 880
+  }
+}

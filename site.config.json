@@ -383,6 +383,19 @@
       "native": true,
       "orientation": "auto",
       "hideBar": true
+    },
+    "pocket": {
+      "enabled": true,
+      "defaultFinish": "returnity-amber",
+      "finishes": [
+        "auto",
+        "returnity-violet",
+        "classic"
+      ],
+      "labels": {
+        "auto": "Returnity Edition"
+      },
+      "bezelTitle": "JERM747 ARCADE"
     }
   }
 }

@@ -1,0 +1,80 @@
+/* Returnity Violet: the Ice Blue frosted enclosure and glass controls, tinted blue-violet
+   (between the game's periwinkle sky and the purple coats). Generated from pocket-ice.css. */
+:host([data-skin="returnity-violet"]) { background:radial-gradient(ellipse at 50% 8%,#403275,#150c2a 78%); }
+.device[data-skin="returnity-violet"] { --s1:#c8c0f6;--s2:#8778dc;--s3:#4e3aa6;--ink:#f4f3fe;--ink-dim:#ded9fd;--bezel:#170f36; }
+.device[data-skin="returnity-violet"] .shell-body {
+  background:
+    radial-gradient(ellipse at 18% -4%, #ffffffb0, transparent 46%),
+    radial-gradient(ellipse at 82% 112%, #1d0d5966, transparent 58%),
+    repeating-linear-gradient(115deg, #ffffff10 0 .5em, transparent .5em 2.4em),
+    linear-gradient(172deg, var(--s1), var(--s2) 52%, var(--s3));
+  box-shadow:
+    inset 0 .5em .4em #ffffffa0, inset .4em 0 .7em #ffffff40, inset 0 -1.2em 1.6em #1f0f6c55,
+    0 .7em 1.2em #060317aa, 0 3.5em 7em #000000cc;
+}
+.device[data-skin="returnity-violet"] .shell-body::after { background:#3e2e8c40; box-shadow:0 .2em 0 #ffffff70; }
+.device[data-skin="returnity-violet"] .shoulder { background:linear-gradient(180deg,#e9e7fe,#8e83dc 60%); color:#1d114d;
+  border-color:#3f318f; box-shadow:inset 0 .35em .2em #ffffffc0,0 .3em .5em #00000066; }
+.device[data-skin="returnity-violet"] .shoulder.held { background:linear-gradient(180deg,#adabfc,#5445ca 60%); }
+.device[data-skin="returnity-violet"] .bezel { background:linear-gradient(170deg,#231850,var(--bezel) 40%,#100927);
+  box-shadow:inset 0 .25em .3em #aba3fb33, inset 0 -.4em .6em #00000088, 0 .35em .2em #ffffff66, 0 -.2em .3em #00000033; }
+.device[data-skin="returnity-violet"] .bezel-title,.device[data-skin="returnity-violet"] .led-group b { color:#9d93ee; }
+.device[data-skin="returnity-violet"] .led.power { background:#8485fa; box-shadow:0 0 .9em #4f47f7; }
+.device[data-skin="returnity-violet"] .screen { box-shadow:0 0 0 .3em #0d071e,0 .15em .3em #c5c2fc55; }
+.device[data-skin="returnity-violet"] .guide-button { background:#1e1445; border-color:#5d4faf; color:#e3e0fe; }
+.device[data-skin="returnity-violet"] .wordmark b { color:#f6f5ff; text-shadow:0 .05em .06em #ffffff,0 -.06em .08em #3e2e8c,0 .1em .3em #2e1f7c66; }
+.device[data-skin="returnity-violet"] .grille { background:radial-gradient(circle,#1c0e5790 .75em,#ffffff50 .9em,transparent 1.05em) 0 0 / 3.15em 3.15em; }
+.device[data-skin="returnity-violet"] .system-btn span { color:#1f1253; }
+.device[data-skin="returnity-violet"] .system-btn i { border-color:#3e308a; background:linear-gradient(180deg,#f4f3fe,#9990e4);
+  box-shadow:inset 0 .2em .2em #ffffff,0 .35em .3em #1c0e5788; }
+.device[data-skin="returnity-violet"] .cartridge { background:repeating-linear-gradient(90deg,#aaa2eb 0 .44em,#938adc .44em .58em,#c0baf4 .58em .7em);
+  border-color:#3f318f; box-shadow:inset 0 .24em .18em #ffffffa0,0 .45em .45em #00000099; }
+.device[data-skin="returnity-violet"] .eject { color:#1f1253; border-color:#3f318f; background:linear-gradient(160deg,#f0effe,#9990e4); }
+.device[data-skin="returnity-violet"] .cartridge-slot { background:linear-gradient(180deg,transparent 62%,#170e3c 65%,#0d061f 86%,#6f60bc 96%); }
+
+/* D-pad: frosted ice caps over a deep-water well. */
+.device[data-skin="returnity-violet"] .dpad { background:radial-gradient(circle at 40% 25%,#c7c1f9 25%,#8b80dc 68%,#44349e 72%,#e3e1fe90 74%,#7062c8 77%,#5e4fb8 91%,#ffffff70 94%,#423095 98%);
+  box-shadow:0 2px 2px #ffffff60, inset 0 2px 5px #1c0e5790; }
+.device[data-skin="returnity-violet"] .pad-well { background:#110838; }
+.device[data-skin="returnity-violet"] .cap-edge { fill:#6e5fcc; stroke:#30217e; }
+.device[data-skin="returnity-violet"] .cap-face { fill:#dedbfd; filter:none; opacity:.92; }
+.device[data-skin="returnity-violet"] .cap-sheen { stroke:#ffffff; opacity:.85; }
+.device[data-skin="returnity-violet"] .cap-foot { stroke:#30217e; opacity:.6; }
+.device[data-skin="returnity-violet"] .dpad button.held .cap-face { fill:#9893fb; }
+.device[data-skin="returnity-violet"] .dpad button.held .cap-edge { stroke:#e9e9fe; }
+.device[data-skin="returnity-violet"] .direction-ring path { stroke:#ffffff55; }
+.device[data-skin="returnity-violet"] .direction-ring path.lit { stroke:#eaecfe; filter:drop-shadow(0 0 3px #7575f9); }
+.device[data-skin="returnity-violet"] .pad-center { background:radial-gradient(circle at 35% 20%,#ebeafe,#8c80dc 70%); }
+
+/* Face buttons: the same glossy convex cap, made of water. Translucent blue
+   glass with a bright rim reflection and a caustic glow from below. */
+.device[data-skin="returnity-violet"] .faces .face {
+  border-color:#30217e;
+  background:conic-gradient(from 125deg,#8e83df,#5241ad 15%,#3a2882 36%,#f4f5ff 49%,#8e83df 63%,#e5e3fe 75%,#5241ad 88%,#8e83df);
+  box-shadow:0 .45em .3em #1c0e5799,0 .9em 1.4em #1c0e5755,0 0 0 .3em #ffffff30;
+}
+.device[data-skin="returnity-violet"] .button-face {
+  color:#f4f5ff;
+  background:
+    radial-gradient(ellipse at 50% 92%, #a3a8fbcc 0%, #4b43e999 24%, transparent 55%),
+    radial-gradient(ellipse at 50% 40%, #4431cf80, #2d15a2a8 62%, #260f7bc4);
+  border:1px solid #cccbfd99;
+  box-shadow:inset 0 2px 3px #ffffffcc, inset 0 -4px 6px #16074c99, 0 0 .6em #544ef840;
+  -webkit-backdrop-filter:blur(3px) saturate(1.4); backdrop-filter:blur(3px) saturate(1.4);
+}
+.device[data-skin="returnity-violet"] .button-face::before {
+  background:linear-gradient(176deg,transparent 2%,#ffffffd0 3%,#e7e8fea0 26%,#cccafd70 44%,#8d84f340 46%,transparent 47%);
+}
+.device[data-skin="returnity-violet"] .button-face::after {
+  background:radial-gradient(ellipse at 26% 14%,#ffffff 0,#ffffff80 4%,transparent 16%),
+             radial-gradient(ellipse at 70% 84%,#c2c5fc66 0,transparent 30%);
+  border-top-color:#ffffffb0; border-left-color:#ffffff50;
+}
+.device[data-skin="returnity-violet"] .face-letter { color:#eaeafedd; text-shadow:0 1px 2px #16074c; }
+.device[data-skin="returnity-violet"] .action-name { color:#ffffff; text-shadow:0 1px 2px #16074c,0 0 8px #2810a2; }
+.device[data-skin="returnity-violet"] .faces .face.held { box-shadow:0 .15em .15em #1c0e57,0 .3em .6em #1c0e5799,0 0 0 .15em #c2c3fc,0 0 1.2em #6566f988; }
+.device[data-skin="returnity-violet"] .faces .face.held .button-face { background:radial-gradient(ellipse at 50% 70%,#cbd1fde0,#504aebc0 45%,#2d15a2d0); border-color:#ffffff; }
+
+/* Joystick */
+.device[data-skin="returnity-violet"] .pocket-stick{background:repeating-radial-gradient(circle,#665bb5 0 .2em,#6053a1 .22em .5em);box-shadow:inset 0 0 0 .6em #564b92,inset 0 0 0 1em #d4d3fd,inset 0 1.6em 2em #32257188}
+.device[data-skin="returnity-violet"] .pocket-stick span{background:radial-gradient(circle at 48% 53%,#aeade8,#9e96e0 45%,#dddefe 56%,#9790dc 64%,#675cae 81%);box-shadow:0 .6em .1em #5a4f8e,0 1em 1.7em #1e184580}

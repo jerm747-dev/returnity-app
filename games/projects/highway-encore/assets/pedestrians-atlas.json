@@ -1,0 +1,81 @@
+{
+  "image": "pedestrians-atlas.png",
+  "size": {
+    "w": 768,
+    "h": 448
+  },
+  "characters": [
+    {
+      "id": "tote-walker",
+      "frames": [
+        {
+          "x": 0,
+          "y": 0,
+          "w": 192,
+          "h": 224
+        },
+        {
+          "x": 192,
+          "y": 0,
+          "w": 192,
+          "h": 224
+        },
+        {
+          "x": 384,
+          "y": 0,
+          "w": 192,
+          "h": 224
+        },
+        {
+          "x": 576,
+          "y": 0,
+          "w": 192,
+          "h": 224
+        }
+      ],
+      "anchor": {
+        "x": 96,
+        "y": 212
+      },
+      "facing": "right",
+      "frameRate": 5,
+      "source": "imagegen walk study; four generated poses"
+    },
+    {
+      "id": "backpack-walker",
+      "frames": [
+        {
+          "x": 0,
+          "y": 224,
+          "w": 192,
+          "h": 224
+        },
+        {
+          "x": 192,
+          "y": 224,
+          "w": 192,
+          "h": 224
+        },
+        {
+          "x": 384,
+          "y": 224,
+          "w": 192,
+          "h": 224
+        },
+        {
+          "x": 576,
+          "y": 224,
+          "w": 192,
+          "h": 224
+        }
+      ],
+      "anchor": {
+        "x": 96,
+        "y": 212
+      },
+      "facing": "right",
+      "frameRate": 5,
+      "source": "imagegen walk study; four generated poses"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10111b"><title>Returnity · Nige Hood’s Sound Arcade</title>
+<link rel="stylesheet" href="game.css"><link rel="stylesheet" href="encore-controls.css"><link rel="icon" href="assets/disc-icon.png">
+<script defer src="motion-clips.js"></script><script defer src="animation.js"></script><script defer src="model.js"></script><script defer src="draw.js"></script><script defer src="sound.js"></script><script defer src="encore-input.js"></script><script defer src="opening.js"></script><script defer src="app.js"></script>
+</head><body>
+<main class="cabinet playing" id="cabinet">
+<header class="mast">
+ <div class="brand"><span class="record" aria-hidden="true"></span><span>SOUND<span class="arc">ARCADE</span></span></div>
+ <div class="system"><button id="sound" class="utility" aria-pressed="false"><span class="ico audio-icon" aria-hidden="true"></span><span id="sound-label">Sound on</span></button><button id="fullscreen" class="utility"><span class="ico expand" aria-hidden="true"></span><span>Fullscreen</span></button></div>
+</header>
+<section class="machine" aria-label="Returnity game">
+ <div class="glass">
+  <div id="screen" class="screen" data-mode="play">
+   <canvas width="480" height="270" id="world" role="img" aria-label="Returnity side-scrolling game field"></canvas>
+   <h1 class="sr">Nige Hood’s Returnity</h1>
+   <div id="opening" aria-label="Opening panorama"><div id="film"></div><button id="skip" type="button">Skip intro</button></div>
+   <div id="hud" class="hud" hidden>
+    <div class="vitals"><img alt="" src="assets/face.webp"><div><strong>NIGEL</strong><div class="bars" id="health" aria-label="Health"></div></div></div>
+    <div class="mission"><b id="place">ON THE STREET</b><span id="objective"></span></div>
+    <button id="pause" class="pause" title="Pause" aria-label="Pause"><span aria-hidden="true" class="pause-bars"></span></button>
+   </div>
+   <div id="boss" class="boss" hidden><b>FEAR</b><div><i></i></div></div>
+
+   <div class="overlay" id="overlay" hidden><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" tabindex="-1" id="sheet"></div></div>
+  </div>
+  <div class="cartridge"><div class="cart-left"><span class="led"></span><span id="status">READY</span><i></i><span class="mode-label">STORY MODE</span></div><div class="cart-right"><span class="player-icon" aria-hidden="true"></span>1 PLAYER <span class="vent" aria-hidden="true"></span></div></div>
+ </div>
+</section>
+<section class="touchdeck" id="touchdeck" aria-label="Touch controller">
+  <div class="direction-control">
+    <div class="dpad" role="group" aria-label="Eight-way direction pad. Slide toward a corner to combine two directions.">
+      <svg class="controller-defs" aria-hidden="true" width="0" height="0"><defs>
+        <linearGradient id="padBevel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8c9196"/><stop offset=".18" stop-color="#50565d"/><stop offset=".49" stop-color="#252a30"/><stop offset=".72" stop-color="#101419"/><stop offset="1" stop-color="#06080b"/></linearGradient>
+        <linearGradient id="padFace" x1="0" y1="0" x2=".65" y2="1"><stop stop-color="#383d43"/><stop offset=".45" stop-color="#272d33"/><stop offset="1" stop-color="#181d23"/></linearGradient>
+        <linearGradient id="padLit" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="#48655f"/><stop offset=".45" stop-color="#2a4842"/><stop offset="1" stop-color="#182d2c"/></linearGradient>
+        <filter id="padGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" seed="12" result="noise"/><feColorMatrix in="noise" type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".48"/></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"/><feBlend in2="SourceGraphic" mode="soft-light"/></filter>
+      </defs></svg>
+      <svg class="direction-ring" viewBox="0 0 200 200" aria-hidden="true"><path data-directions="up" d="M70.95 10.60 A94 94 0 0 1 129.05 10.60"/><path data-directions="up right" d="M142.68 16.25 A94 94 0 0 1 183.75 57.32"/><path data-directions="right" d="M189.40 70.95 A94 94 0 0 1 189.40 129.05"/><path data-directions="down right" d="M183.75 142.68 A94 94 0 0 1 142.68 183.75"/><path data-directions="down" d="M129.05 189.40 A94 94 0 0 1 70.95 189.40"/><path data-directions="down left" d="M57.32 183.75 A94 94 0 0 1 16.25 142.68"/><path data-directions="left" d="M10.60 129.05 A94 94 0 0 1 10.60 70.95"/><path data-directions="up left" d="M16.25 57.32 A94 94 0 0 1 57.32 16.25"/></svg>
+      <span class="pad-well" aria-hidden="true"></span>
+      <button class="pad-up" data-key="up" aria-label="Up" aria-pressed="false"><svg viewBox="0 0 100 116" aria-hidden="true" focusable="false"><path class="cap-edge" d="M17 4 Q3 5 3 21 L3 75 Q3 88 14 94 L43 111 Q50 115 57 111 L86 94 Q97 88 97 75 L97 21 Q97 5 83 4 Z"/><path class="cap-face" d="M19 10 Q11 11 11 23 L11 73 Q11 81 19 86 L46 101 Q50 104 54 101 L81 86 Q89 81 89 73 L89 23 Q89 11 81 10 Z"/><path class="cap-sheen" d="M18 13 Q13 15 13 24 L13 72 M20 12 L79 12 Q85 13 86 23"/><path class="cap-foot" d="M18 88 L44 104 Q50 108 56 104 L83 88"/></svg></button>
+      <button class="pad-right" data-key="right" aria-label="Move right" aria-pressed="false"><svg viewBox="0 0 100 116" aria-hidden="true" focusable="false"><path class="cap-edge" d="M17 4 Q3 5 3 21 L3 75 Q3 88 14 94 L43 111 Q50 115 57 111 L86 94 Q97 88 97 75 L97 21 Q97 5 83 4 Z"/><path class="cap-face" d="M19 10 Q11 11 11 23 L11 73 Q11 81 19 86 L46 101 Q50 104 54 101 L81 86 Q89 81 89 73 L89 23 Q89 11 81 10 Z"/><path class="cap-sheen" d="M18 13 Q13 15 13 24 L13 72 M20 12 L79 12 Q85 13 86 23"/><path class="cap-foot" d="M18 88 L44 104 Q50 108 56 104 L83 88"/></svg></button>
+      <button class="pad-down" data-key="down" aria-label="Down" aria-pressed="false"><svg viewBox="0 0 100 116" aria-hidden="true" focusable="false"><path class="cap-edge" d="M17 4 Q3 5 3 21 L3 75 Q3 88 14 94 L43 111 Q50 115 57 111 L86 94 Q97 88 97 75 L97 21 Q97 5 83 4 Z"/><path class="cap-face" d="M19 10 Q11 11 11 23 L11 73 Q11 81 19 86 L46 101 Q50 104 54 101 L81 86 Q89 81 89 73 L89 23 Q89 11 81 10 Z"/><path class="cap-sheen" d="M18 13 Q13 15 13 24 L13 72 M20 12 L79 12 Q85 13 86 23"/><path class="cap-foot" d="M18 88 L44 104 Q50 108 56 104 L83 88"/></svg></button>
+      <button class="pad-left" data-key="left" aria-label="Move left" aria-pressed="false"><svg viewBox="0 0 100 116" aria-hidden="true" focusable="false"><path class="cap-edge" d="M17 4 Q3 5 3 21 L3 75 Q3 88 14 94 L43 111 Q50 115 57 111 L86 94 Q97 88 97 75 L97 21 Q97 5 83 4 Z"/><path class="cap-face" d="M19 10 Q11 11 11 23 L11 73 Q11 81 19 86 L46 101 Q50 104 54 101 L81 86 Q89 81 89 73 L89 23 Q89 11 81 10 Z"/><path class="cap-sheen" d="M18 13 Q13 15 13 24 L13 72 M20 12 L79 12 Q85 13 86 23"/><path class="cap-foot" d="M18 88 L44 104 Q50 108 56 104 L83 88"/></svg></button>
+      <span class="pad-center" aria-hidden="true"></span>
+    </div>
+  </div>
+  <div class="action-control">
+    <div class="actionpad" role="group" aria-label="Action buttons"><span class="thumb-arc" aria-hidden="true"></span>
+      <button type="button" class="arc-fire" data-key="shot" aria-label="Throw fireball" aria-pressed="false"><span class="button-face"><span class="action-name">Fire</span></span></button>
+      <button type="button" class="arc-backup" data-key="special" aria-label="A, call backup" aria-pressed="false"><span class="button-face"><span class="action-name">Backup</span><kbd>A</kbd></span></button>
+      <button type="button" class="arc-strike" data-key="strike" aria-label="B, strike, hold to lift" aria-pressed="false"><span class="button-face"><span class="action-name">Strike</span><kbd>B</kbd></span></button>
+      <button type="button" class="arc-jump" data-key="jump" aria-label="C, jump" aria-pressed="false"><span class="button-face"><span class="action-name">Jump</span><kbd>C</kbd></span></button>
+    </div>
+  </div>
+</section>
+<div class="prompt" id="prompt" hidden></div>
+<section class="deck" aria-label="Control deck">
+ <div class="deck-header"><h2><i class="deck-lines" aria-hidden="true"></i>Control deck</h2><div class="tabs" role="group" aria-label="Controller layout"><button class="selected" data-layout="keyboard" aria-pressed="true">Keyboard</button><button data-layout="gamepad" aria-pressed="false">Gamepad</button><button data-layout="touch" aria-pressed="false">Touch</button></div></div>
+ <div class="legend" id="legend"></div>
+</section>
+<footer><span class="footbrand">JERM747 GAMES</span><span>RETURNITY <i>/</i> CHAPTER 01</span></footer>
+<div id="announce" aria-live="polite" class="sr"></div>
+</main></body></html>

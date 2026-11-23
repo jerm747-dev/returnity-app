@@ -1,0 +1,266 @@
+{
+  "ok": true,
+  "projects": [
+    {
+      "slug": "returnity",
+      "url": "projects/returnity/index.html",
+      "title": "Returnity",
+      "tagline": "Nige Hood · The Beginning · After Hours",
+      "description": "Run the block as Closet Nigel, hand out your CDs and face FEAR at the open mic in the first chapter of Nige Hood’s playable autobiography. Plays in the Returnity Edition Pocket Player; press SELECT on the Pocket for themes and options.",
+      "kind": "game",
+      "status": "prototype",
+      "version": "0.3.0",
+      "controls": [
+        "gamepad",
+        "keyboard",
+        "touch"
+      ],
+      "credit": "Nige Hood · Returnity story and supplied character art. Game by Jerm747 Games.",
+      "accent": "#e8a463",
+      "cover": "projects/returnity/cover.webp?v=1795417074000",
+      "order": 0,
+      "gamepad": {},
+      "gamepadLabels": {},
+      "download": null,
+      "screenshots": [],
+      "updated": "2026-11-23T06:58:02.000Z",
+      "actions": [
+        {
+          "id": "left",
+          "label": "Move left",
+          "key": "ArrowLeft"
+        },
+        {
+          "id": "right",
+          "label": "Move right",
+          "key": "ArrowRight"
+        },
+        {
+          "id": "up",
+          "label": "Move up",
+          "key": "ArrowUp"
+        },
+        {
+          "id": "down",
+          "label": "Move down",
+          "key": "ArrowDown"
+        },
+        {
+          "id": "jump",
+          "label": "Jump",
+          "key": "z",
+          "pad": "A"
+        },
+        {
+          "id": "shot",
+          "label": "Fire",
+          "key": "c",
+          "pad": "B"
+        },
+        {
+          "id": "strike",
+          "label": "Strike / hold to lift",
+          "key": "x",
+          "pad": "X"
+        },
+        {
+          "id": "special",
+          "label": "Call backup",
+          "key": "v",
+          "pad": "Y"
+        },
+        {
+          "id": "pause",
+          "label": "Pause",
+          "key": "p",
+          "pad": "START"
+        }
+      ],
+      "controllerMode": "native",
+      "pocket": {
+        "mode": "gamepad",
+        "default": true,
+        "labels": {
+          "a": "Jump",
+          "b": "Fire",
+          "x": "Strike",
+          "y": "Backup"
+        },
+        "buttons": {},
+        "hint": "D-pad moves. A jumps, X strikes (hold to lift), B throws fire, Y calls backup. START pauses; A confirms menus.",
+        "hide": ".mast,.cartridge,.touchdeck,.deck,footer",
+        "css": "html,body{overflow:hidden!important;background:#101119!important}.cabinet,.cabinet.playing{width:100%!important;max-width:none!important;height:100dvh!important;margin:0!important;padding:0!important;display:block!important}.machine{height:100%!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}.glass{height:100%!important;padding:0!important;border:0!important;border-radius:0!important}.screen,.screen[data-mode]{aspect-ratio:auto!important;height:100%!important;min-height:0!important}",
+        "ratio": 1.3333,
+        "width": 880
+      }
+    },
+    {
+      "slug": "highway-encore",
+      "url": "projects/highway-encore/index.html",
+      "title": "Highway Encore",
+      "tagline": "Run the highway with Nige Hood",
+      "description": "Flip the road crew, catch the Encore Disc and raise the flag at the mansion. A side-scroller from Returnity. The title and pause screens have a Music button for the site's songs.",
+      "kind": "game",
+      "status": "prototype",
+      "version": "v3",
+      "controls": [
+        "gamepad",
+        "keyboard",
+        "touch"
+      ],
+      "credit": "Nige Hood · Returnity. Game workshop.",
+      "accent": "#e2ad4f",
+      "cover": "",
+      "order": 1,
+      "gamepad": {},
+      "gamepadLabels": {},
+      "download": null,
+      "screenshots": [],
+      "updated": "2026-11-23T06:58:12.000Z",
+      "actions": [
+        {
+          "id": "left",
+          "label": "Move left",
+          "key": "ArrowLeft",
+          "pad": "LEFT"
+        },
+        {
+          "id": "right",
+          "label": "Move right",
+          "key": "ArrowRight",
+          "pad": "RIGHT"
+        },
+        {
+          "id": "jump",
+          "label": "Jump",
+          "key": " ",
+          "pad": "A"
+        },
+        {
+          "id": "duck",
+          "label": "Duck",
+          "key": "ArrowDown",
+          "pad": "DOWN"
+        },
+        {
+          "id": "speed",
+          "label": "Speed",
+          "key": "Shift",
+          "pad": "RB"
+        },
+        {
+          "id": "lift",
+          "label": "Lift / throw",
+          "key": "x",
+          "pad": "X"
+        },
+        {
+          "id": "pause",
+          "label": "Pause",
+          "key": "p",
+          "pad": "START"
+        },
+        {
+          "id": "music",
+          "label": "Music",
+          "key": "m",
+          "pad": "SELECT"
+        }
+      ],
+      "controllerMode": "",
+      "pocket": {
+        "mode": "keys",
+        "labels": {
+          "a": "Jump",
+          "x": "Lift",
+          "r": "Speed"
+        },
+        "buttons": {},
+        "hint": "D-pad moves, Down ducks. A jumps, X lifts or throws, hold R for speed. START pauses; SELECT opens the Pocket menu (Music is in there).",
+        "hide": ".deck",
+        "css": ""
+      }
+    },
+    {
+      "slug": "flight-control-deck",
+      "url": "projects/flight-control-deck/index.html",
+      "title": "Flight Control Deck",
+      "tagline": "Asteroid Blast, races and free flight",
+      "description": "A flight and space-shooter deck with chase, cockpit and nose cameras, warp, shields and race modes. Remappable controls with two-stick calibration, mouse mode and on-screen touch controls.",
+      "kind": "game",
+      "status": "in_progress",
+      "version": "v7.1",
+      "controls": [
+        "gamepad",
+        "keyboard",
+        "mouse",
+        "touch"
+      ],
+      "credit": "Original Jerm747 project. All rights reserved.",
+      "accent": "#8FA7BF",
+      "cover": "projects/flight-control-deck/cover.jpg?v=1793682090000",
+      "order": 10,
+      "gamepad": {},
+      "gamepadLabels": {},
+      "download": null,
+      "screenshots": [],
+      "updated": "2026-11-03T05:01:30.000Z",
+      "actions": [
+        {
+          "id": "up",
+          "label": "Move up",
+          "key": "w"
+        },
+        {
+          "id": "down",
+          "label": "Move down",
+          "key": "s"
+        },
+        {
+          "id": "left",
+          "label": "Move left",
+          "key": "a"
+        },
+        {
+          "id": "right",
+          "label": "Move right",
+          "key": "d"
+        },
+        {
+          "id": "fire",
+          "label": "Fire",
+          "key": " ",
+          "pad": "A"
+        },
+        {
+          "id": "aim-up",
+          "label": "Aim up",
+          "key": "ArrowUp"
+        },
+        {
+          "id": "aim-down",
+          "label": "Aim down",
+          "key": "ArrowDown"
+        },
+        {
+          "id": "aim-left",
+          "label": "Aim left",
+          "key": "ArrowLeft"
+        },
+        {
+          "id": "aim-right",
+          "label": "Aim right",
+          "key": "ArrowRight"
+        },
+        {
+          "id": "start",
+          "label": "Start / confirm",
+          "key": "Enter",
+          "pad": "START"
+        }
+      ],
+      "controllerMode": "native",
+      "pocket": null
+    }
+  ]
+}
